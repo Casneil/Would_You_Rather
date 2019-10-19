@@ -46,8 +46,8 @@ const useStyles = makeStyles(theme => ({
 const Questions = props => {
   const classes = useStyles();
   const { question } = props;
-  const { id, optionOne, optionTwo, hasVoted, author, avatar } = question;
-  console.log(props);
+  const { id, optionOne, optionTwo, hasVoted, avatar, author } = question;
+  console.log(author);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
@@ -77,6 +77,7 @@ const Questions = props => {
             Option One
           </Typography>
           {optionOne.text}
+          {}
           <br />
           <br />
           {/* {optionOne.votes}

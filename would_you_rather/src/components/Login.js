@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import { Authed_User, authedUser } from "../actions/authedUser";
-// import User from "./User";
 
 const Login = props => {
   const [user, setUser] = useState(" ");
@@ -21,9 +20,8 @@ const Login = props => {
   useEffect(() => {
     // Before
     // props.dispatch(Authed_User(false));
-
     //After
-    props.dispatch(authedUser(true));
+    // props.dispatch(authedUser(true));
   }, []);
 
   const { userIds, loading } = props;
