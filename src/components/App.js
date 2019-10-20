@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { initialData } from "../actions/shared";
-import Cards from "./Cards";
+import QuestionsList from "./QuestionsList";
 import WelcomeCard from "./WelcomeCard";
 import "../App.css";
 import Login from "./Login";
@@ -29,7 +29,7 @@ const App = props => {
           <Route to exact path="/cards" component={Cards} />
         )} */}
         <Login />
-        <Cards />
+        {/* <QuestionsList /> */}
       </div>
     </BrowserRouter>
   );

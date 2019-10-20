@@ -43,16 +43,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Questions = props => {
+const Question = props => {
   const classes = useStyles();
   const { question } = props;
-  const { id, optionOne, optionTwo, hasVoted, avatar, author } = question;
-  console.log(author);
+  const { id, optionOne, optionTwo, hasVoted, author, avatar } = question;
+  console.log("bbbb", props);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
   }, []);
-  // console.log(props);
 
   return (
     <Grid container className={classes.root}>
@@ -77,7 +76,6 @@ const Questions = props => {
             Option One
           </Typography>
           {optionOne.text}
-          {}
           <br />
           <br />
           {/* {optionOne.votes}
@@ -86,6 +84,7 @@ const Questions = props => {
             Option Two
           </Typography>
           {optionTwo.text}
+          {avatar}
           <br />
           <br />
           <Button size="small" color="primary">
@@ -108,12 +107,14 @@ function mapStateToProps({ authedUser, users, question }, { id }) {
 
   return {
     authedUser,
+    users,
+    question
     //Before
     // question: Object.keys(users),
 
     // After
-    question: formatQuestion(questions, users[questions.author], authedUser)
+    // question: formatQuestion(questions, users[questions.author], authedUser)
   };
 }
 
-export default connect(mapStateToProps)(Questions);
+export default connect(mapStateToProps)(Question);

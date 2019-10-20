@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import Questions from "./Questions";
+import Question from "./Question";
 
-const Cards = props => {
-  console.log(props);
+const QuestionsList = props => {
+  console.log(" bbbbb", props);
   return (
     <div>
       {props.questionID.map(id => (
         // <Grid>
         <h3 key={id}>
-          <Questions id={id} />
+          <Question id={id} />
         </h3>
         /* </Grid> */
       ))}
@@ -27,4 +27,4 @@ function mapStateToProps({ question, users, authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Cards);
+export default connect(mapStateToProps)(QuestionsList);
