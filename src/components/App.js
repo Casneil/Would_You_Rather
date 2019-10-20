@@ -29,7 +29,7 @@ const App = props => {
           <Route to exact path="/cards" component={Cards} />
         )} */}
         <Login />
-        {/* <QuestionsList /> */}
+        <QuestionsList />
       </div>
     </BrowserRouter>
   );

@@ -45,9 +45,8 @@ const useStyles = makeStyles(theme => ({
 
 const Question = props => {
   const classes = useStyles();
-  const { question } = props;
-  const { id, optionOne, optionTwo, hasVoted, author, avatar } = question;
-  console.log("bbbb", props);
+  const { qs, avtr } = props;
+  console.log("GGGGGGGGGGGGGGGGGGGG", props);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
@@ -62,12 +61,12 @@ const Question = props => {
               component="img"
               alt="Contemplative Reptile"
               height="140"
-              image={id}
+              // image={id}
               title="Contemplative Reptile"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                Lizard
+                {qs.author}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -75,16 +74,14 @@ const Question = props => {
           <Typography variant="body2" color="textSecondary" component="p">
             Option One
           </Typography>
-          {optionOne.text}
+          {qs.optionOne.text}
           <br />
+          {/* {qs.optionOne.votes} */}
           <br />
-          {/* {optionOne.votes}
-      <br /> */}
           <Typography variant="body2" color="textSecondary" component="p">
             Option Two
           </Typography>
-          {optionTwo.text}
-          {avatar}
+          {qs.optionTwo.text}
           <br />
           <br />
           <Button size="small" color="primary">
@@ -103,12 +100,14 @@ const Question = props => {
 };
 
 function mapStateToProps({ authedUser, users, question }, { id }) {
-  const questions = question[id];
+  const qs = question[id];
+  // const asker = qs.author;
+  const avtr = users;
+  // console.log("GGGGGGGGGGGGG", avtr);
 
   return {
-    authedUser,
-    users,
-    question
+    qs,
+    avtr
     //Before
     // question: Object.keys(users),
 
