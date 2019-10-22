@@ -1,12 +1,12 @@
 import { authedUser } from "./authedUser";
 
-export const USERS = "USERS";
+export const RECIEVE_USERS = "RECIEVE_USERS";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
 export const recieveUsers = users => {
   return {
-    type: USERS,
+    type: RECIEVE_USERS,
     users
   };
 };

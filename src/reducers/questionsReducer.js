@@ -1,8 +1,8 @@
-import { QUESTIONS } from "../actions/questions";
+import { RECIEVE_QUESTIONS } from "../actions/questions";
 
-export const question = (state = {}, action) => {
+export const questions = (state = {}, action) => {
   switch (action.type) {
-    case QUESTIONS:
+    case RECIEVE_QUESTIONS:
       return {
         ...state,
         ...action.questions

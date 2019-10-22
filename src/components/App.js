@@ -13,8 +13,8 @@ import LoadingBar from "./Loading";
 import Navbar from "./Navbar";
 
 const App = props => {
-  const { authedUser } = props;
-  console.log("AAAAAAPPPPP", authedUser);
+  const { authedUser, users } = props;
+  console.log("AAAAAAPPPPP", props);
 
   useEffect(() => {
     props.dispatch(initialData());
@@ -29,16 +29,17 @@ const App = props => {
         ) : (
           <Route to exact path="/cards" component={QuestionsList} />
         )}
-        {/* <Login /> */}
+        <Login />
         {/* <QuestionsList /> */}
       </div>
     </BrowserRouter>
   );
 };
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    authedUser
+    authedUser,
+    users
   };
 }
 

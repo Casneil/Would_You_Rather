@@ -1,7 +1,7 @@
 import React, { useEffect, Children } from "react";
 import { connect } from "react-redux";
 import recieveQuestions from "../actions/questions";
-import { dispatch } from "C:/Users/paran/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/range";
+import { recieveUsers } from "../actions/users";
 // import { question } from "../reducers/questionsReducer";
 import { formatQuestion } from "../api/helper";
 
@@ -46,10 +46,11 @@ const useStyles = makeStyles(theme => ({
 const Question = props => {
   const classes = useStyles();
   const { qs, avtr } = props;
-  console.log("GGGGGGGGGGGGGGGGGGGG", props);
+  console.log("GGGGGGGGGGGGGGGGGGGG", qs);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
+    props.dispatch(recieveUsers());
   }, []);
 
   return (
@@ -67,6 +68,7 @@ const Question = props => {
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {qs.author}
+                {avtr}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -102,7 +104,7 @@ const Question = props => {
 function mapStateToProps({ authedUser, users, question }, { id }) {
   const qs = question[id];
   // const asker = qs.author;
-  const avtr = users;
+  const avtr = users.avatarURL;
   // console.log("GGGGGGGGGGGGG", avtr);
 
   return {

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const WelcomeCard = () => {
+const WelcomeCard = props => {
   const classes = useStyles();
 
   return (
@@ -58,8 +59,27 @@ const WelcomeCard = () => {
           </Typography>
         </CardContent>
       </Card>
+      {/* <Login /> */}
     </div>
   );
 };
 
-export default WelcomeCard;
+// Recieving userss to Render the dropdown menu
+function mapStateToProps({ users, questions }, { id }) {
+  const qs = questions[id];
+  // const asker = qs.author;
+  const avtr = users.avatarURL;
+  // console.log("GGGGGGGGGGGGG", avtr);
+
+  return {
+    qs,
+    avtr
+    //Before
+    // question: Object.keys(users),
+
+    // After
+    // question: formatQuestion(questions, users[questions.author], authedUser)
+  };
+}
+
+export default connect(mapStateToProps)(WelcomeCard);

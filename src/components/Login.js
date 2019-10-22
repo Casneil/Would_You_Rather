@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
 import { connect } from "react-redux";
-import { Authed_User, authedUser } from "../actions/authedUser";
+import { setAuthedUser } from "../actions/authedUser";
 // import User from "./User";
 
 const Login = props => {
@@ -23,15 +23,12 @@ const Login = props => {
     // props.dispatch(Authed_User(false));
 
     //After
-    props.dispatch(authedUser(true));
+    props.dispatch(setAuthedUser(true));
   }, []);
 
   const { userIds, loading } = props;
   //After
-  const { users, author } = props;
-  {
-    console.log(users, author);
-  }
+  const { users } = props;
 
   return (
     <div>
@@ -42,16 +39,9 @@ const Login = props => {
           </option>
         );
       })}
+      <img src={users.avatarURL} />
     </div>
   );
-  // {
-  //   <h2>Who are you?</h2>
-  //     {userIds.map(id => (
-  //       <div key={id}>
-  //         <User id={id} loading={loading} />
-  //       </div>
-  //     ))}
-  // }
 };
 
 function mapStateToProps({ users }) {
