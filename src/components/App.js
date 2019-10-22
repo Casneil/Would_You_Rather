@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { initialData } from "../actions/shared";
+import { recieveUsers } from "../actions/shared";
 import QuestionsList from "./QuestionsList";
 import WelcomeCard from "./WelcomeCard";
 import "../App.css";
@@ -13,7 +14,7 @@ import Navbar from "./Navbar";
 
 const App = props => {
   const { authedUser } = props;
-  console.log(authedUser);
+  console.log("AAAAAAPPPPP", authedUser);
 
   useEffect(() => {
     props.dispatch(initialData());
@@ -23,13 +24,13 @@ const App = props => {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        {/* {authedUser === null ? (
+        {authedUser === null ? (
           <Route exact path="/" component={WelcomeCard} />
         ) : (
-          <Route to exact path="/cards" component={Cards} />
-        )} */}
-        <Login />
-        <QuestionsList />
+          <Route to exact path="/cards" component={QuestionsList} />
+        )}
+        {/* <Login /> */}
+        {/* <QuestionsList /> */}
       </div>
     </BrowserRouter>
   );

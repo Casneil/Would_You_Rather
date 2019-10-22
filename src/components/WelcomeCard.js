@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,6 +9,7 @@ import { blue } from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import image from "../svg/casneil.svg";
+import Login from "./Login";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -15,6 +17,9 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     flexGrow: 1
+  },
+  link: {
+    margin: theme.spacing(1)
   },
   media: {
     height: 0,
@@ -38,14 +43,14 @@ const WelcomeCard = () => {
               CS
             </Avatar>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title="Casneil Simpson's Would You Rather"
+          subheader="Visit My Github"
         />
         <CardMedia
           className={classes.media}
           image={image}
           // image={require("../svg/casneil.svg")}
-          title="Casneil's Would you rather"
+          title="Github"
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">

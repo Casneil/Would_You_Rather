@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -20,6 +21,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Navbar = props => {
+  const { users } = props;
+  console.log("NNNNAVVVBAAABR", users.id);
   const classes = useStyles();
 
   return (
@@ -27,13 +30,17 @@ const Navbar = props => {
       <AppBar position="static">
         <Toolbar>
           <Tooltip title="Home">
-            <Button className={classes.menuButton} color="inherit">
+            <Button className={classes.menuButton} color="inherit" href="/">
               <HomeIcon />
             </Button>
           </Tooltip>
 
           <Tooltip title="New Question">
-            <Button className={classes.menuButton} color="inherit">
+            <Button
+              className={classes.menuButton}
+              color="inherit"
+              href="/new-pole"
+            >
               <QuestionAnswerIcon />
             </Button>
           </Tooltip>
@@ -49,7 +56,9 @@ const Navbar = props => {
             </Typography>
           </Tooltip>
           <Tooltip title="Login">
-            <Button color="inherit">Log Out</Button>
+            <Button color="inherit" href="/logout">
+              Log Out
+            </Button>
           </Tooltip>
         </Toolbar>
       </AppBar>
@@ -57,4 +66,10 @@ const Navbar = props => {
   );
 };
 
-export default Navbar;
+function mapStateToProps({ users }) {
+  return {
+    users
+  };
+}
+
+export default connect(mapStateToProps)(Navbar);

@@ -8,15 +8,15 @@ const Login = props => {
   const [user, setUser] = useState(" ");
   const [updateUser, setUpdateUser] = useState([]);
 
-  // const onChange = value => {
-  //   setUser(value);
-  // };
+  const onChange = value => {
+    setUser(value);
+  };
 
-  // const handleChange = e => {
-  //   e.preventDefault();
-  //   setUpdateUser(user);
-  //   const authedUser = updateUser;
-  // };
+  const handleChange = e => {
+    e.preventDefault();
+    setUpdateUser(user);
+    const authedUser = updateUser;
+  };
 
   useEffect(() => {
     // Before
@@ -35,28 +35,27 @@ const Login = props => {
 
   return (
     <div>
-      {/* {Object.keys(users).map(user => {
+      {Object.keys(users).map(user => {
         return (
           <option key={users[user]} value={users[user]}>
             {users[user].name}
           </option>
         );
-      })} */}
+      })}
     </div>
   );
-  {
-    /* <h2>Who are you?</h2>
-      {userIds.map(id => (
-        <div key={id}>
-          <User id={id} loading={loading} />
-        </div>
-      ))} */
-  }
+  // {
+  //   <h2>Who are you?</h2>
+  //     {userIds.map(id => (
+  //       <div key={id}>
+  //         <User id={id} loading={loading} />
+  //       </div>
+  //     ))}
+  // }
 };
 
-function mapStateToProps(users) {
+function mapStateToProps({ users }) {
   return {
-    // userIds: Object.keys(users),
     users
   };
 }
