@@ -9,6 +9,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import { Tooltip } from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,9 +22,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Navbar = props => {
+  const classes = useStyles();
   const { users } = props;
   // console.log("NNNNAVVVBAAABR", users.id);
-  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -46,19 +47,26 @@ const Navbar = props => {
           </Tooltip>
 
           <Tooltip title="Leader Board">
-            <Button className={classes.menuButton} color="inherit">
+            <Button
+              className={classes.menuButton}
+              color="inherit"
+              href="leaderBoard"
+            >
               <EqualizerIcon />
             </Button>
           </Tooltip>
           <Tooltip title="Username">
-            <Typography variant="h6" className={classes.title}>
+            <Typography className={classes.title} variant="h6" noWrap>
               Hello Mr Simpson
             </Typography>
           </Tooltip>
           <Tooltip title="Login">
             <Button color="inherit" href="/login">
-              Log Out
+              Log In
             </Button>
+          </Tooltip>
+          <Tooltip title="Account">
+            <AccountCircle />
           </Tooltip>
         </Toolbar>
       </AppBar>

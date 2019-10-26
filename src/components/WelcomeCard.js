@@ -15,10 +15,18 @@ import { recieveUsers } from "../actions/users";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 900
+    maxWidth: "auto",
+    margin: "auto",
+    marginTop: 40,
+    objectFit: "cover",
+    paddingBottom: 0
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    flexGrow: 1,
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around"
   },
   link: {
     margin: theme.spacing(1)
@@ -42,7 +50,7 @@ const WelcomeCard = props => {
   const classes = useStyles();
 
   return (
-    <div className="welcome-card">
+    <div className={classes.root}>
       <Card className={classes.card}>
         <CardHeader
           avatar={
