@@ -56,9 +56,11 @@ const Navbar = props => {
             </Button>
           </Tooltip>
           <Tooltip title="Username">
-            <Typography className={classes.title} variant="h6" noWrap>
-              Hello Mr Simpson
-            </Typography>
+            <Typography
+              className={classes.title}
+              variant="h6"
+              noWrap
+            ></Typography>
           </Tooltip>
           <Tooltip title="Login">
             <Button color="inherit" href="/login">
