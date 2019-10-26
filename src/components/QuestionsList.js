@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Question from "./Question";
 
 const QuestionsList = props => {
-  console.log(" bbbbb", props);
+  // console.log(" bbbbb", props);
   return (
     <div>
       {props.questionID.map(id => (
@@ -19,10 +19,10 @@ const QuestionsList = props => {
   );
 };
 
-function mapStateToProps({ question, users, authedUser }) {
+function mapStateToProps({ questions, users, authedUser }) {
   return {
-    questionID: Object.keys(question).sort(
-      (a, b) => question[b].timestamp - question[a].timestamp
+    questionID: Object.keys(questions).sort(
+      (a, b) => questions[b].timestamp - questions[a].timestamp
     )
   };
 }

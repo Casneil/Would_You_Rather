@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 
 const Question = props => {
   const classes = useStyles();
-  const { qs, avtr } = props;
-  console.log("GGGGGGGGGGGGGGGGGGGG", qs);
+  const { qs, user } = props;
+  // console.log("GGGGGGGGGGGGGGGGGGGG", props);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
@@ -62,13 +62,13 @@ const Question = props => {
               component="img"
               alt="Contemplative Reptile"
               height="140"
-              // image={id}
+              // image={avtr.avatarURL}
               title="Contemplative Reptile"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {qs.author}
-                {avtr}
+                {/* {avtr} */}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -101,15 +101,14 @@ const Question = props => {
   );
 };
 
-function mapStateToProps({ authedUser, users, question }, { id }) {
-  const qs = question[id];
+function mapStateToProps({ authedUser, users, questions }, { id }) {
+  const qs = questions[id];
   // const asker = qs.author;
-  const avtr = users.avatarURL;
+  // const avtr = users;
   // console.log("GGGGGGGGGGGGG", avtr);
 
   return {
-    qs,
-    avtr
+    qs
     //Before
     // question: Object.keys(users),
 

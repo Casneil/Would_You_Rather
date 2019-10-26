@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = props => {
   const { users } = props;
-  console.log("NNNNAVVVBAAABR", users.id);
+  // console.log("NNNNAVVVBAAABR", users.id);
   const classes = useStyles();
 
   return (
@@ -35,11 +35,11 @@ const Navbar = props => {
             </Button>
           </Tooltip>
 
-          <Tooltip title="New Question">
+          <Tooltip title="Questions">
             <Button
               className={classes.menuButton}
               color="inherit"
-              href="/new-pole"
+              href="/questions"
             >
               <QuestionAnswerIcon />
             </Button>
@@ -56,7 +56,7 @@ const Navbar = props => {
             </Typography>
           </Tooltip>
           <Tooltip title="Login">
-            <Button color="inherit" href="/logout">
+            <Button color="inherit" href="/login">
               Log Out
             </Button>
           </Tooltip>

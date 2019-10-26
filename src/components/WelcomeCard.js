@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,10 +11,11 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import image from "../svg/casneil.svg";
 import Login from "./Login";
+import { recieveUsers } from "../actions/users";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 1000
+    maxWidth: 900
   },
   root: {
     flexGrow: 1
@@ -33,6 +34,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const WelcomeCard = props => {
+  useEffect(() => {
+    recieveUsers();
+  });
+
+  // console.log("PRRRRROOOOOOOOPSSSS!", props);
   const classes = useStyles();
 
   return (
@@ -65,7 +71,7 @@ const WelcomeCard = props => {
 };
 
 // Recieving userss to Render the dropdown menu
-function mapStateToProps({ users, questions }, { id }) {
+function mapStateToProps({ users, questions, avatarURL }, { id }) {
   const qs = questions[id];
   // const asker = qs.author;
   const avtr = users.avatarURL;
@@ -73,7 +79,8 @@ function mapStateToProps({ users, questions }, { id }) {
 
   return {
     qs,
-    avtr
+    avtr,
+    users
     //Before
     // question: Object.keys(users),
 
