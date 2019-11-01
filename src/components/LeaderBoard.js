@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   root: {
     width: "100%",
     overflowX: "auto",
-    marginTop: 30
+    marginTop: 40
   },
   table: {
     minWidth: 500

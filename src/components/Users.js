@@ -21,9 +21,9 @@ const User = props => {
   );
 };
 
-function mapStateToProps({ users }, { id }) {
+function mapStateToProps({ users }) {
   return {
-    users
+    users: Object.values(users)
   };
 }
 

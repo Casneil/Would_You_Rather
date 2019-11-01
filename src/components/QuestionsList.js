@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Question from "./Question";
+
+// Material UI
+import { Tooltip } from "@material-ui/core";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
@@ -13,17 +18,33 @@ const useStyles = makeStyles(theme => ({
   },
   control: {
     padding: theme.spacing(2)
+  },
+  fab: {
+    margin: theme.spacing(1),
+    float: "right"
   }
 }));
 
 const QuestionsList = props => {
+  const { questionID, users } = props;
+  console.log(props);
+
   const classes = useStyles();
-  // console.log(" bbbbb", props);
 
   return (
     <div>
+      <Tooltip title="Add a question">
+        <Fab
+          color="primary"
+          aria-label="add"
+          className={classes.fab}
+          href="/post"
+        >
+          <AddIcon />
+        </Fab>
+      </Tooltip>
       <Grid Grid container className={classes.root}>
-        {props.questionID.map(id => (
+        {questionID.map(id => (
           <Grid>
             <h3 key={id}>
               <Question id={id} />
@@ -41,7 +62,8 @@ function mapStateToProps({ questions, users, authedUser }) {
   return {
     questionID: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
-    )
+    ),
+    users: Object.values(users)
   };
 }
 

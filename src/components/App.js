@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { initialData } from "../actions/shared";
 import { recieveUsers } from "../actions/shared";
+import PostQuestion from "./PostQuestion";
 // import QuestionsList from "./QuestionsList";
 // import WelcomeCard from "./WelcomeCard";
 import "../App.css";

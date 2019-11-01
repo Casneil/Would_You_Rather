@@ -1,4 +1,4 @@
-import React, { useEffect, Children } from "react";
+import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import recieveQuestions from "../actions/questions";
 import { recieveUsers } from "../actions/users";
@@ -21,8 +21,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 545,
     minWidth: 350,
     margin: "auto",
-    marginBottom: 10,
-    marginTop: 25,
+    marginTop: 40,
     objectFit: "cover",
     paddingBottom: 0
   },
@@ -40,13 +39,17 @@ const useStyles = makeStyles(theme => ({
     height: 0,
     objectFit: "cover",
     paddingTop: "56.25%" // 16:9
+  },
+  img: {
+    height: 80,
+    margin: 2
   }
 }));
 
 const Question = props => {
   const classes = useStyles();
-  const { qs, user } = props;
-  // console.log("GGGGGGGGGGGGGGGGGGGG", props);
+  const { qs, users } = props;
+  console.log("GGGGGGGGGGGGGGGGGGGG", props);
 
   useEffect(() => {
     props.dispatch(recieveQuestions());
@@ -58,17 +61,19 @@ const Question = props => {
       <Grid>
         <Card className={classes.card}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="140"
-              // image={avtr.avatarURL}
-              title="Contemplative Reptile"
-            />
+            {users.map(user => (
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                height="140"
+                title="Contemplative Reptile"
+                image={user.avatarURL}
+              />
+            ))}
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {qs.author}
-                {/* {avtr} */}
+                {/* {avtr.avatarURL} */}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -92,9 +97,6 @@ const Question = props => {
           <Button size="small" color="primary">
             Learn More
           </Button>
-          {/* {optionTwo.votes}
-      <br /> */}
-          {/* <img src={id} /> */}
         </Card>
       </Grid>
     </Grid>
@@ -108,7 +110,9 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   // console.log("GGGGGGGGGGGGG", avtr);
 
   return {
-    qs
+    qs,
+    users: Object.values(users)
+
     //Before
     // question: Object.keys(users),
 
