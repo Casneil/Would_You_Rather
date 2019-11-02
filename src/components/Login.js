@@ -1,101 +1,74 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-// import User from "./User";
 
-import Radio from "@material-ui/core/Radio";
 import { makeStyles } from "@material-ui/core/styles";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import { object } from "prop-types";
+import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(1),
+    minWidth: 200,
+    marginTop: 40
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
   }
 }));
 
-const Login = props => {
+const Login = ({ login, users }) => {
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = useState(0);
+
   const classes = useStyles();
   const [user, setUser] = useState("");
-  const [updateUser, setUpdateUser] = useState("");
-  // const [value, setValue] = useState(" Sarah Edo");
-
-  //From material UI Radio
-  // const handleChange = event => {
-  //   setValue(event.target.value);
-  //   console.log(value);
-  // };
+  const [updateUserId, setUpdateUserId] = useState("");
 
   const onChange = event => {
     setUser(event.target.value);
-    console.log("UUSER", user);
   };
 
   const onSubmit = event => {
+    setUpdateUserId(user);
+    {
+      updateUserId ? login(updateUserId) : alert("required");
+    }
     event.preventDefault();
-    setUpdateUser(user);
-    console.log("Clicked", updateUser);
-    // const authedUser = updateUser;
   };
-
-  // useEffect(() => {
-  //   // Before
-  //   // props.dispatch(Authed_User(false));
-
-  //   //After
-  //   props.dispatch(setAuthedUser(updateUser));
-  //   console.log("UPdateSER", updateUser);
-  // }, []);
-
-  const { userIds, loading } = props;
-  //After
-  const { users } = props;
+  useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
 
   return (
-    // <form onSubmit={onSubmit}>
-    //   <div>
-    //     {Object.keys(users).map(user => {
-    //       return (
-    //         <option key={users[user]} value={users[user]}>
-    //           {users[user].name}
-    //         </option>
-    //       );
-    //     })}
-    //     <img src={users.avatarURL} />
-    //   </div>
-    //   <button>Submit</button>
-    // </form>
     <div>
-      <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Login In</FormLabel>
-        {Object.keys(users).map(user => {
-          return (
-            <RadioGroup
-              aria-label="user"
-              name="user"
-              user={user}
-              onChange={onChange}
-            >
-              <FormControlLabel
-                value={updateUser}
-                control={<Radio />}
-                label={users[user].name}
-              />
+      <form onSubmit={onSubmit}>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
+            Users
+          </InputLabel>
 
-              {/* <FormControlLabel
-                        value="disabled"
-                        disabled
-                        control={<Radio />}
-                      label="(Disabled option)" */}
-            </RadioGroup>
-          );
-        })}
-      </FormControl>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={user}
+            onChange={onChange}
+            displayEmpty
+            labelWidth={labelWidth}
+          >
+            {Object.keys(users).map(user => (
+              <MenuItem value={user}>{users[user].name}</MenuItem>
+            ))}
+          </Select>
+          <br />
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </FormControl>
+      </form>
     </div>
   );
 };
@@ -106,4 +79,15 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+function mapDispatchToProps(dispatch) {
+  return {
+    login: id => {
+      dispatch(setAuthedUser(id));
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

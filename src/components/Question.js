@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import recieveQuestions from "../actions/questions";
+import { recieveQuestions } from "../actions/questions";
 import { recieveUsers } from "../actions/users";
 // import { question } from "../reducers/questionsReducer";
 import { formatQuestion } from "../api/helper";
