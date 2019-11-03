@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
+import { Redirect, withRouter } from "react-router-dom";
 
+// Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,38 +19,46 @@ const useStyles = makeStyles(theme => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
+  },
+  img: {
+    height: 80,
+    margin: 2
   }
 }));
 
-const Login = ({ login, users }) => {
+const Login = ({ login, users, authedUser }) => {
+  console.log(authedUser);
+
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 
   const classes = useStyles();
   const [user, setUser] = useState("");
-  const [updateUserId, setUpdateUserId] = useState("");
+
+  const onSubmit = event => {
+    event.preventDefault();
+    {
+      user ? login(user) : alert("Cannot be empty!");
+    }
+  };
 
   const onChange = event => {
     setUser(event.target.value);
   };
 
-  const onSubmit = event => {
-    setUpdateUserId(user);
-    {
-      updateUserId ? login(updateUserId) : alert("required");
-    }
-    event.preventDefault();
-  };
   useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
+  if (authedUser) {
+    return <Redirect to="/questions" />;
+  }
   return (
     <div>
       <form onSubmit={onSubmit}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
-            Users
+            User required*
           </InputLabel>
 
           <Select
@@ -60,7 +70,10 @@ const Login = ({ login, users }) => {
             labelWidth={labelWidth}
           >
             {Object.keys(users).map(user => (
-              <MenuItem value={user}>{users[user].name}</MenuItem>
+              <MenuItem key={users[user].id} value={user}>
+                <img src={users[user].avatarURL} className={classes.img} />
+                {users[user].name}
+              </MenuItem>
             ))}
           </Select>
           <br />
@@ -73,9 +86,10 @@ const Login = ({ login, users }) => {
   );
 };
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    users
+    users,
+    authedUser
   };
 }
 
@@ -87,7 +101,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login)
+);

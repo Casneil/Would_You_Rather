@@ -37,7 +37,7 @@ export default function LoadingBar() {
         className={classes.progress}
         variant="determinate"
         value={progress}
-        color="secondary"
+        color="primary"
       />
     </div>
   );

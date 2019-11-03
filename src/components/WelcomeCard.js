@@ -46,7 +46,6 @@ const WelcomeCard = props => {
     recieveUsers();
   });
 
-  // console.log("PRRRRROOOOOOOOPSSSS!", props);
   const classes = useStyles();
 
   return (
@@ -61,12 +60,7 @@ const WelcomeCard = props => {
           title="Casneil Simpson's Would You Rather"
           subheader="Visit My Github"
         />
-        <CardMedia
-          className={classes.media}
-          image={image}
-          // image={require("../svg/casneil.svg")}
-          title="Github"
-        />
+        <CardMedia className={classes.media} image={image} title="Github" />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             This is a version of the would you rather project from udacity
@@ -81,19 +75,12 @@ const WelcomeCard = props => {
 // Recieving userss to Render the dropdown menu
 function mapStateToProps({ users, questions, avatarURL }, { id }) {
   const qs = questions[id];
-  // const asker = qs.author;
   const avtr = users.avatarURL;
-  // console.log("GGGGGGGGGGGGG", avtr);
 
   return {
     qs,
     avtr,
     users
-    //Before
-    // question: Object.keys(users),
-
-    // After
-    // question: formatQuestion(questions, users[questions.author], authedUser)
   };
 }
 

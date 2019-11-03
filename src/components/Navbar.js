@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +11,8 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import { Tooltip } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import Avatar from "@material-ui/core/Avatar";
+import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,68 +20,107 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {},
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    textAlign: "center"
+  },
+  avatar: {
+    backgroundColor: blue[900]
+  },
+  img: {
+    height: 50,
+    margin: 2
   }
 }));
 
 const Navbar = props => {
   const classes = useStyles();
-  const { users } = props;
-  // console.log("NNNNAVVVBAAABR", users.id);
+  const { users, authedUser } = props;
+  console.log("NNNNAVVVBAAABR", props);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Tooltip title="Home">
-            <Button className={classes.menuButton} color="inherit" href="/">
-              <HomeIcon />
-            </Button>
-          </Tooltip>
+          {authedUser ? (
+            <>
+              <Tooltip title="Home">
+                <Button
+                  className={classes.menuButton}
+                  color="inherit"
+                  component={Link}
+                  to="/"
+                >
+                  <HomeIcon />
+                </Button>
+              </Tooltip>
 
-          <Tooltip title="Questions">
-            <Button
-              className={classes.menuButton}
-              color="inherit"
-              href="/questions"
-            >
-              <QuestionAnswerIcon />
-            </Button>
-          </Tooltip>
+              <Tooltip title="Questions">
+                <Button
+                  className={classes.menuButton}
+                  color="inherit"
+                  component={Link}
+                  to="/questions"
+                >
+                  <QuestionAnswerIcon />
+                </Button>
+              </Tooltip>
 
-          <Tooltip title="Leader Board">
-            <Button
-              className={classes.menuButton}
-              color="inherit"
-              href="leaderBoard"
-            >
-              <EqualizerIcon />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Username">
-            <Typography
-              className={classes.title}
-              variant="h6"
-              noWrap
-            ></Typography>
-          </Tooltip>
-          <Tooltip title="Login">
-            <Button color="inherit" href="/login">
-              Log In
-            </Button>
-          </Tooltip>
-          <Tooltip title="Account">
-            <AccountCircle />
-          </Tooltip>
+              <Tooltip title="Leader Board">
+                <Button
+                  className={classes.menuButton}
+                  color="inherit"
+                  component={Link}
+                  to="/leaderBoard"
+                >
+                  <EqualizerIcon />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Username">
+                <Typography
+                  variant="h6"
+                  noWrap
+                  className={classes.title}
+                ></Typography>
+              </Tooltip>
+              <Tooltip title="Log Out">
+                <Button color="inherit" component={Link} to="/logout">
+                  Log Out
+                </Button>
+              </Tooltip>
+              <Tooltip title={authedUser}>
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                  <img
+                    className={classes.img}
+                    src={users.find(user => user.id === authedUser).avatarURL}
+                  />
+                </Avatar>
+              </Tooltip>
+            </>
+          ) : (
+            <>
+              <Typography
+                variant="h6"
+                noWrap
+                className={classes.title}
+              ></Typography>
+
+              <Tooltip title="Login">
+                <Button color="inherit" href="/login">
+                  Log In
+                </Button>
+              </Tooltip>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    users
+    users: Object.values(users),
+    authedUser
   };
 }
 

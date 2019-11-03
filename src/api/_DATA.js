@@ -1,8 +1,21 @@
 import sara from "../svg/linda.svg";
 import tyler from "../svg/tom.svg";
 import john from "../svg/ben.svg";
+import casneil from "../svg/casneil.svg";
 
 let users = {
+  casneil: {
+    id: "casneil",
+    name: "Casneil Simpson",
+    avatarURL: `${casneil}`,
+    answers: {
+      "8xf0y6ziyjabvozdd253nd": "optionOne",
+      "6ni6ok3ym7mf1p33lnez": "optionTwo",
+      am8ehyc8byjqgar0jgpub9: "optionTwo",
+      loxhs1bqm25b708cmbf3g: "optionOne"
+    },
+    questions: ["8xf0y6ziyjacvozdd253nd", "8xf0y6ziyjacaozdd253nd"]
+  },
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",

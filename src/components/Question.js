@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { recieveQuestions } from "../actions/questions";
 import { recieveUsers } from "../actions/users";
 // import { question } from "../reducers/questionsReducer";
@@ -36,19 +37,21 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   },
   media: {
-    height: 0,
-    objectFit: "cover",
-    paddingTop: "56.25%" // 16:9
+    height: "12%",
+    objectFit: "cover"
+    // paddingTop: "56.25%" // 16:9
   },
   img: {
-    height: 80,
-    margin: 2
+    height: "5%",
+    margin: 0
+    // borderRadius: "100%"
   }
 }));
 
 const Question = props => {
   const classes = useStyles();
-  const { qs, users } = props;
+  const { qs, users, authedUser } = props;
+
   console.log("GGGGGGGGGGGGGGGGGGGG", props);
 
   useEffect(() => {
@@ -61,16 +64,17 @@ const Question = props => {
       <Grid>
         <Card className={classes.card}>
           <CardActionArea>
-            {users.map(user => (
-              <CardMedia
-                component="img"
-                alt="Contemplative Reptile"
-                height="140"
-                title="Contemplative Reptile"
-                image={user.avatarURL}
-              />
-            ))}
+            <CardMedia
+              className={classes.img}
+              component="img"
+              alt="author"
+              height="140"
+              title={qs.author}
+              image={users.find(user => user.id === qs.author).avatarURL}
+            />
+
             <CardContent>
+              {/* <img src={users[0].avatarURL} /> */}
               <Typography gutterBottom variant="h5" component="h2">
                 {qs.author}
                 {/* {avtr.avatarURL} */}
@@ -105,13 +109,11 @@ const Question = props => {
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   const qs = questions[id];
-  // const asker = qs.author;
-  // const avtr = users;
-  // console.log("GGGGGGGGGGGGG", avtr);
 
   return {
     qs,
-    users: Object.values(users)
+    users: Object.values(users),
+    authedUser
 
     //Before
     // question: Object.keys(users),
@@ -121,4 +123,4 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));

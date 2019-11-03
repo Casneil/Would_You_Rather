@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Question from "./Question";
+import { Link } from "react-router-dom";
 
 // Material UI
 import { Tooltip } from "@material-ui/core";
@@ -38,7 +39,8 @@ const QuestionsList = props => {
           color="primary"
           aria-label="add"
           className={classes.fab}
-          href="/post"
+          component={Link}
+          to="/post"
         >
           <AddIcon />
         </Fab>

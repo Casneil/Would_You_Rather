@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { handleAddQuestion } from "../actions/shared";
 
@@ -24,15 +25,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PostQuestion = () => {
+const PostQuestion = props => {
+  const { postQuestion } = props;
   const classes = useStyles();
-  const [optionOne, setOptionOne] = useState("");
-  const [optionTwo, setOptionTwo] = useState("");
+  const [optionOneText, setOptionOne] = useState("");
+  const [optionTwoText, setOptionTwo] = useState("");
 
   const handleOptionOneChange = event => {
     event.preventDefault();
     setOptionOne({
-      optionOne: event.target.value
+      optionOneText: event.target.value
     });
     // console.log(optionOne);
   };
@@ -40,15 +42,18 @@ const PostQuestion = () => {
   const handleOptionTwoChange = event => {
     event.preventDefault();
     setOptionTwo({
-      optionTwo: event.target.value
+      optionTwoText: event.target.value
     });
     // console.log(optionTwo);
   };
-
   const handleSubmit = event => {
     event.preventDefault();
+
     // const { optionOne, optionTwo } = "";
-    handleAddQuestion(optionOne, optionTwo);
+    postQuestion(optionOneText, optionTwoText);
+    //Clear text field after Submition
+    setOptionOne("");
+    setOptionTwo("");
   };
 
   // s
@@ -64,7 +69,7 @@ const PostQuestion = () => {
               label="Text 1 Required"
               multiline
               rowsMax="4"
-              defaultValue={optionOne}
+              defaultValue={optionOneText}
               onChange={handleOptionOneChange}
               className={classes.textField}
               margin="normal"
@@ -80,7 +85,7 @@ const PostQuestion = () => {
               label="Text 2 Required"
               multiline
               rowsMax="4"
-              defaultValue={optionTwo}
+              defaultValue={optionTwoText}
               onChange={handleOptionTwoChange}
               className={classes.textField}
               margin="normal"
@@ -88,7 +93,7 @@ const PostQuestion = () => {
             />
           </Tooltip>
           <div>
-            {optionOne === "" || optionTwo === "" ? (
+            {optionOneText === "" || optionTwoText === "" ? (
               <></>
             ) : (
               <Button
@@ -115,20 +120,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PostQuestion);
-
-// Disabled text field for when text has been entered
-{
-  /* <TextField
-disabled
-id="filled-required"
-label=""
-defaultValue=""
-className={classes.textField}
-margin="normal"
-variant="outlined"
-/> */
-}
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(PostQuestion)
+);

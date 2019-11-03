@@ -25,7 +25,7 @@ const App = props => {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        <Router />
+        <Router loginUser={authedUser} />
 
         {/* {authedUser === null ? (
           <Route exact path="/" component={WelcomeCard} />
