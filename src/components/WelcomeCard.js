@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import Link from "@material-ui/core/Link";
+import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -10,16 +9,15 @@ import { blue } from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import image from "../svg/casneil.svg";
-import Login from "./Login";
 import { recieveUsers } from "../actions/users";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: "auto",
-    margin: "auto",
     marginTop: 40,
     objectFit: "cover",
-    paddingBottom: 0
+    minWidth: "60%",
+    maxWidth: "100%",
+    height: "auto"
   },
   root: {
     flexGrow: 1,
@@ -41,11 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const WelcomeCard = props => {
-  useEffect(() => {
-    recieveUsers();
-  });
-
+const WelcomeCard = () => {
   const classes = useStyles();
 
   return (
@@ -67,21 +61,8 @@ const WelcomeCard = props => {
           </Typography>
         </CardContent>
       </Card>
-      {/* <Login /> */}
     </div>
   );
 };
 
-// Recieving userss to Render the dropdown menu
-function mapStateToProps({ users, questions, avatarURL }, { id }) {
-  const qs = questions[id];
-  const avtr = users.avatarURL;
-
-  return {
-    qs,
-    avtr,
-    users
-  };
-}
-
-export default connect(mapStateToProps)(WelcomeCard);
+export default WelcomeCard;

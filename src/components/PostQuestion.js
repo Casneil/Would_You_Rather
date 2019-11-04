@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import { handleAddQuestion } from "../actions/shared";
 
@@ -30,37 +30,35 @@ const PostQuestion = props => {
   const classes = useStyles();
   const [optionOneText, setOptionOne] = useState("");
   const [optionTwoText, setOptionTwo] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  const handleOptionOneChange = event => {
+  const optionOneChange = event => {
     event.preventDefault();
-    setOptionOne({
-      optionOneText: event.target.value
-    });
-    // console.log(optionOne);
+    setOptionOne(event.target.value);
   };
 
-  const handleOptionTwoChange = event => {
+  const optionTwoChange = event => {
     event.preventDefault();
-    setOptionTwo({
-      optionTwoText: event.target.value
-    });
-    // console.log(optionTwo);
+    setOptionTwo(event.target.value);
   };
-  const handleSubmit = event => {
+  const onSubmit = event => {
     event.preventDefault();
 
-    // const { optionOne, optionTwo } = "";
     postQuestion(optionOneText, optionTwoText);
     //Clear text field after Submition
     setOptionOne("");
     setOptionTwo("");
+    setRedirect(true);
   };
 
-  // s
+  if (redirect) {
+    return <Redirect to="/questions" />;
+  }
+
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <h1 className="option1">Would You Rather</h1>
           <Tooltip title="Option 1 " placement="right-end">
             <TextField
@@ -70,7 +68,7 @@ const PostQuestion = props => {
               multiline
               rowsMax="4"
               defaultValue={optionOneText}
-              onChange={handleOptionOneChange}
+              onChange={optionOneChange}
               className={classes.textField}
               margin="normal"
               variant="outlined"
@@ -86,14 +84,14 @@ const PostQuestion = props => {
               multiline
               rowsMax="4"
               defaultValue={optionTwoText}
-              onChange={handleOptionTwoChange}
+              onChange={optionTwoChange}
               className={classes.textField}
               margin="normal"
               variant="outlined"
             />
           </Tooltip>
           <div>
-            {optionOneText === "" || optionTwoText === "" ? (
+            {optionOneText.trim() === "" || optionTwoText.trim() === "" ? (
               <></>
             ) : (
               <Button

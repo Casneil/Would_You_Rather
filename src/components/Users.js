@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 const User = props => {
   const { users } = props;
-  //   console.log("NNNEEEEEEEW!", props);
-
   return (
     <Fragment>
       {users.map(user => (

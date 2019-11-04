@@ -1,5 +1,4 @@
 // Import needed functions from Data.js
-
 import {
   _getQuestions,
   _getUsers,

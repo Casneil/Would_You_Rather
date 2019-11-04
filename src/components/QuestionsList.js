@@ -27,8 +27,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QuestionsList = props => {
-  const { questionID, users } = props;
-  console.log(props);
+  const { questionID } = props;
 
   const classes = useStyles();
 
@@ -55,17 +54,14 @@ const QuestionsList = props => {
         ))}
       </Grid>
     </div>
-    // </Card>
-    // </Grid>
   );
 };
 
-function mapStateToProps({ questions, users, authedUser }) {
+function mapStateToProps({ questions }) {
   return {
     questionID: Object.keys(questions).sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
-    ),
-    users: Object.values(users)
+    )
   };
 }
 

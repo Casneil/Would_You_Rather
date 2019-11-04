@@ -9,8 +9,7 @@ import PostQuestion from "./PostQuestion";
 import Logout from "./Logout";
 
 const Router = props => {
-  const { users, authedUser, loginUser } = props;
-  console.log(props);
+  const { loginUser } = props;
 
   return (
     <div>
@@ -23,7 +22,6 @@ const Router = props => {
             <Route exact path="/questions" component={QuestionList} />
             <Route exact path="/leaderBoard" component={LeaderBoard} />
             <Route exact path="/post" component={PostQuestion} />
-            {/* <Route exact path="/logout" component={WelcomeCard} /> */}
           </Fragment>
         )}
       </Switch>

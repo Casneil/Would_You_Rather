@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { initialData } from "../actions/shared";
-import { recieveUsers } from "../actions/shared";
-import PostQuestion from "./PostQuestion";
-// import QuestionsList from "./QuestionsList";
-// import WelcomeCard from "./WelcomeCard";
-import "../App.css";
-import Login from "./Login";
-import Users from "./Users";
 import Router from "./Router";
+import "../App.css";
 
 //MUI Imports
 import LoadingBar from "./Loading";
@@ -26,15 +20,7 @@ const App = props => {
       <div className="App">
         <Navbar />
         <Router loginUser={authedUser} />
-
-        {/* {authedUser === null ? (
-          <Route exact path="/" component={WelcomeCard} />
-        ) : (
-          <Route to exact path="/cards" component={QuestionsList} />
-        )} */}
         {/* <Login /> */}
-        {/* <QuestionsList /> */}
-        {/* <Users /> */}
       </div>
     </BrowserRouter>
   );
