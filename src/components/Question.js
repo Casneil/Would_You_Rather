@@ -1,8 +1,9 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { recieveQuestions } from "../actions/questions";
 import { recieveUsers } from "../actions/users";
+
 // import { question } from "../reducers/questionsReducer";
 import { formatQuestion } from "../api/helper";
 
@@ -53,9 +54,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Question = props => {
+const Question = ({ qs, users, authedUser, dispatch, answered }) => {
   const classes = useStyles();
-  const { qs, users, authedUser } = props;
+  // const { qs, users, authedUser, unAnswered, answered } = props;
 
   // Switch Component States
   const [state, setState] = React.useState({
@@ -67,95 +68,98 @@ const Question = props => {
     setState({ ...state, [name]: event.target.checked });
   };
 
-  console.log("GGGGGGGGGGGGGGGGGGGG", props);
+  console.log("GGGGGGGGGGGGGGGGGGGG", qs, users, dispatch, authedUser);
 
   useEffect(() => {
-    props.dispatch(recieveQuestions());
-    props.dispatch(recieveUsers());
+    dispatch(recieveQuestions());
+    dispatch(recieveUsers());
   }, []);
 
   return (
-    <Grid container className={classes.root}>
-      <Grid>
-        <form>
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.img}
-                component="img"
-                alt="author"
-                height="140"
-                title={qs.author}
-                image={users.find(user => user.id === qs.author).avatarURL}
-              />
+    // <Grid container className={classes.root}>
+    //   <Grid>
+    <div>
+      <form>
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.img}
+              component="img"
+              alt="author"
+              height="140"
+              title={qs.author}
+              image={users.find(user => user.id === qs.author).avatarURL}
+            />
 
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {qs.author}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions></CardActions>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <Tooltip title="Option One" placement="right-end" s>
-                {state.checkedB === true ? (
-                  <Switch
-                    checked={state.checkedA}
-                    inputProps={{ "aria-label": "secondary checkbox" }}
-                  />
-                ) : (
-                  <Switch
-                    checked={state.checkedA}
-                    onChange={handleChange("checkedA")}
-                    value={qs.optionOne.text}
-                    color="primary"
-                    inputProps={{ "aria-label": "secondary checkbox" }}
-                  />
-                )}
-              </Tooltip>
-            </Typography>
-            {qs.optionOne.text}
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {qs.author}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions></CardActions>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <Tooltip title="Option One" placement="right-end" s>
+              {state.checkedB === true ? (
+                <Switch
+                  checked={state.checkedA}
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              ) : (
+                <Switch
+                  checked={state.checkedA}
+                  onChange={handleChange("checkedA")}
+                  value={qs.optionOne.text}
+                  color="primary"
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              )}
+            </Tooltip>
+          </Typography>
+          {qs.optionOne.text}
 
-            {/* {qs.optionOne.votes} */}
+          {/* {qs.optionOne.votes} */}
 
-            <Typography variant="body2" color="textSecondary" component="p">
-              <Tooltip title="Option Two" placement="right-end">
-                {state.checkedA === true ? (
-                  <Switch
-                    checked={state.checkedB}
-                    color="primary"
-                    inputProps={{ "aria-label": "secondary checkbox" }}
-                  />
-                ) : (
-                  <Switch
-                    checked={state.checkedB}
-                    onChange={handleChange("checkedB")}
-                    value={qs.optionTwo.text}
-                    color="primary"
-                    inputProps={{ "aria-label": "secondary checkbox" }}
-                  />
-                )}
-              </Tooltip>
-            </Typography>
-            {qs.optionTwo.text}
-            <br />
-            <br />
-            {state.checkedA || state.checkedB === true ? (
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                type="submit"
-              >
-                Submit
-              </Button>
-            ) : (
-              <></>
-            )}
-          </Card>
-        </form>
-      </Grid>
-    </Grid>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <Tooltip title="Option Two" placement="right-end">
+              {state.checkedA === true ? (
+                <Switch
+                  checked={state.checkedB}
+                  color="primary"
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              ) : (
+                <Switch
+                  checked={state.checkedB}
+                  onChange={handleChange("checkedB")}
+                  value={qs.optionTwo.text}
+                  color="primary"
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              )}
+            </Tooltip>
+          </Typography>
+          {qs.optionTwo.text}
+          <br />
+          <br />
+          {state.checkedA || state.checkedB === true ? (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              type="submit"
+            >
+              Submit
+            </Button>
+          ) : (
+            <></>
+          )}
+        </Card>
+      </form>
+    </div>
+
+    //   </Grid>
+    // </Grid>
   );
 };
 

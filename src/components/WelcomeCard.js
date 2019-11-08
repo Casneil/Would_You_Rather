@@ -9,7 +9,7 @@ import { blue } from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import image from "../svg/casneil.svg";
-import { recieveUsers } from "../actions/users";
+// import { recieveUsers } from "../actions/users";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     height: "auto"
   },
   root: {
-    flexGrow: 1,
     flexGrow: 1,
     display: "flex",
     flexWrap: "wrap",

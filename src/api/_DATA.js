@@ -9,13 +9,12 @@ let users = {
     name: "Casneil Simpson",
     avatarURL: `${casneil}`,
     answers: {
-      "8xf0y6ziyjabvozdd253nd": "optionOne",
-      "6ni6ok3ym7mf1p33lnez": "optionTwo",
-      am8ehyc8byjqgar0jgpub9: "optionTwo",
-      loxhs1bqm25b708cmbf3g: "optionOne"
+      "8xf0y6ziyjabvozdd253cd": "optionOne",
+      "6ni6ok3ym7mf1p33lnez": "optionTwo"
     },
-    questions: ["8xf0y6ziyjacvozdd253nd", "8xf0y6ziyjacaozdd253nd"]
+    questions: ["8xf0y6ziyjabvozdd253cd"]
   },
+
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
@@ -52,6 +51,21 @@ let users = {
 };
 
 let questions = {
+  // Casneil's Question
+  "8xf0y6ziyjabvozdd253cd": {
+    id: "8xf0y6ziyjabvozdd253cd",
+    author: "casneil",
+    timestamp: 2067166872634,
+    optionOne: {
+      votes: ["sarahedo", "johndoe"],
+      text: "Learn React/-Native"
+    },
+    optionTwo: {
+      votes: ["tylermcginnis"],
+      text: "Learn Flutter"
+    }
+  },
+
   "8xf0y6ziyjabvozdd253nd": {
     id: "8xf0y6ziyjabvozdd253nd",
     author: "sarahedo",

@@ -31,10 +31,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Navbar = props => {
+const Navbar = ({ users, authedUser }) => {
   const classes = useStyles();
-  const { users, authedUser } = props;
-  console.log("NNNNAVVVBAAABR", props);
+  // const { users, authedUser } = props;
 
   return (
     <div className={classes.root}>

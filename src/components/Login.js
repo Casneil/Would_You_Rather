@@ -61,7 +61,7 @@ const Login = ({ login, users, authedUser }) => {
   }
   return (
     <div>
-      <img src={Pic} className={classes.cover} />
+      <img src={Pic} className={classes.cover} alt="casneil's avatar" />
       <form onSubmit={onSubmit}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
@@ -78,15 +78,25 @@ const Login = ({ login, users, authedUser }) => {
           >
             {Object.keys(users).map(user => (
               <MenuItem key={users[user].id} value={user}>
-                <img src={users[user].avatarURL} className={classes.img} />
+                <img
+                  src={users[user].avatarURL}
+                  className={classes.img}
+                  alt="user's avatar"
+                />
                 {users[user].name}
               </MenuItem>
             ))}
           </Select>
           <br />
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
+          {user === "" ? (
+            <Button variant="contained" disabled>
+              Submit
+            </Button>
+          ) : (
+            <Button variant="contained" color="primary" type="submit">
+              Submit
+            </Button>
+          )}
         </FormControl>
       </form>
     </div>
