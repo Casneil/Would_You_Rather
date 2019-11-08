@@ -54,7 +54,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Question = ({ qs, users, authedUser, dispatch, answered }) => {
+const Question = ({ qs, users, authedUser, dispatch, Answered, Pending }) => {
+  console.log("PEEEEEEENDING", Pending);
   const classes = useStyles();
   // const { qs, users, authedUser, unAnswered, answered } = props;
 
@@ -74,6 +75,42 @@ const Question = ({ qs, users, authedUser, dispatch, answered }) => {
     dispatch(recieveQuestions());
     dispatch(recieveUsers());
   }, []);
+
+  if (Answered) {
+    return (
+      <div>
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.img}
+              component="img"
+              alt="author"
+              height="140"
+              title={qs.author}
+              image={users.find(user => user.id === qs.author).avatarURL}
+            />
+
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {qs.author}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions></CardActions>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {qs.optionOne.text}
+          </Typography>
+
+          {/* {qs.optionOne.votes} */}
+
+          <Typography variant="body2" color="textSecondary" component="p">
+            {qs.optionTwo.text}
+          </Typography>
+          <br />
+        </Card>
+      </div>
+    );
+  }
 
   return (
     // <Grid container className={classes.root}>
@@ -99,7 +136,7 @@ const Question = ({ qs, users, authedUser, dispatch, answered }) => {
           </CardActionArea>
           <CardActions></CardActions>
           <Typography variant="body2" color="textSecondary" component="p">
-            <Tooltip title="Option One" placement="right-end" s>
+            <Tooltip title="Option One" placement="right-end">
               {state.checkedB === true ? (
                 <Switch
                   checked={state.checkedA}

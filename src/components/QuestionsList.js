@@ -108,14 +108,14 @@ const QuestionsList = ({ pending, answered }) => {
           ? pending.map(id => (
               <Grid>
                 <>
-                  <Question id={id} />
+                  <Question id={id} Pending={pending} />
                 </>
               </Grid>
             ))
           : answered.map(id => (
               <Grid>
                 <>
-                  <Question id={id} />
+                  <Question id={id} Answered={answered} />
                 </>
               </Grid>
             ))}

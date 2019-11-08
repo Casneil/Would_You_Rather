@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
-
 import { handleAddQuestion } from "../actions/shared";
+import QuestionsPic from "../images/quesPic.jpg";
 
 // Material UI
 import { Tooltip } from "@material-ui/core";
@@ -22,6 +22,11 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1)
+  },
+  cover: {
+    marginTop: "6vh",
+    maxWidth: "100%",
+    height: "auto"
   }
 }));
 
@@ -57,55 +62,54 @@ const PostQuestion = props => {
 
   return (
     <div>
-      <div>
-        <form onSubmit={onSubmit}>
-          <h1 className="option1">Would You Rather</h1>
-          <Tooltip title="Option 1 " placement="right-end">
-            <TextField
-              required
-              id="filled-required"
-              label="Text 1 Required"
-              multiline
-              rowsMax="4"
-              defaultValue={optionOneText}
-              onChange={optionOneChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-          </Tooltip>
-          <h3 className="or">Or</h3>
-          <h1 className="option1">Would You Rather</h1>
-          <Tooltip title="Option 2 " placement="right-end">
-            <TextField
-              required
-              id="filled-required"
-              label="Text 2 Required"
-              multiline
-              rowsMax="4"
-              defaultValue={optionTwoText}
-              onChange={optionTwoChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-          </Tooltip>
-          <div>
-            {optionOneText.trim() === "" || optionTwoText.trim() === "" ? (
-              <></>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                type="submit"
-              >
-                Submit
-              </Button>
-            )}
-          </div>
-        </form>
-      </div>
+      <img src={QuestionsPic} alt="QuesPic" className={classes.cover} />
+      <form onSubmit={onSubmit}>
+        <h1 className="option1">Would You Rather</h1>
+        <Tooltip title="Option 1 " placement="right-end">
+          <TextField
+            required
+            id="filled-required"
+            label="Text 1 Required"
+            multiline
+            rowsMax="4"
+            defaultValue={optionOneText}
+            onChange={optionOneChange}
+            className={classes.textField}
+            margin="normal"
+            variant="outlined"
+          />
+        </Tooltip>
+        <h3 className="or">Or</h3>
+        <h1 className="option2">Would You Rather</h1>
+        <Tooltip title="Option 2 " placement="right-end">
+          <TextField
+            required
+            id="filled-required"
+            label="Text 2 Required"
+            multiline
+            rowsMax="4"
+            defaultValue={optionTwoText}
+            onChange={optionTwoChange}
+            className={classes.textField}
+            margin="normal"
+            variant="outlined"
+          />
+        </Tooltip>
+        <div>
+          {optionOneText.trim() === "" || optionTwoText.trim() === "" ? (
+            <></>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              type="submit"
+            >
+              Submit
+            </Button>
+          )}
+        </div>
+      </form>
     </div>
   );
 };

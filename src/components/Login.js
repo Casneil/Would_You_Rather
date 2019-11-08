@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Redirect, withRouter } from "react-router-dom";
-import Pic from "../svg/cover.jpg";
+import Cover from "../images/cover.jpg";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -61,7 +61,7 @@ const Login = ({ login, users, authedUser }) => {
   }
   return (
     <div>
-      <img src={Pic} className={classes.cover} alt="casneil's avatar" />
+      <img src={Cover} className={classes.cover} alt="casneil's avatar" />
       <form onSubmit={onSubmit}>
         <FormControl variant="outlined" className={classes.formControl}>
           <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">

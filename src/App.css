@@ -32,10 +32,14 @@ body {
   color: #09d3ac;
 }
 
+.option2 {
+  color: #6d4c41;
+}
+
 .option1 {
-  color: #4615b2;
+  color: #fdd835;
 }
 
 .or {
-  color: #f50057;
+  color: #009688;
 }
