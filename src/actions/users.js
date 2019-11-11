@@ -1,3 +1,4 @@
+import { answerQuestion } from "../api/api";
 export const RECIEVE_USERS = "RECIEVE_USERS";
 export const ADD_QUESTION = "ADD_QUESTION";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";

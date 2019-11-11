@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = ({ login, users, authedUser }) => {
-  console.log(authedUser);
+  // console.log(authedUser);
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);

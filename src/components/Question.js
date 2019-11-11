@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { recieveQuestions } from "../actions/questions";
 import { recieveUsers } from "../actions/users";
+import { handleAnswer } from "../actions/shared";
+import Loading from "./Loading";
 
 // import { question } from "../reducers/questionsReducer";
 import { formatQuestion } from "../api/helper";
@@ -54,8 +56,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Question = ({ qs, users, authedUser, dispatch, Answered, Pending }) => {
-  console.log("PEEEEEEENDING", Pending);
+const Question = ({
+  qs,
+  users,
+  authedUser,
+  dispatch,
+  Answered,
+  Pending,
+  saveQuestionAnswer,
+  Users,
+  Questions,
+  postAnswer
+}) => {
+  const [selected, setSelected] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
   // const { qs, users, authedUser, unAnswered, answered } = props;
 
@@ -67,14 +82,42 @@ const Question = ({ qs, users, authedUser, dispatch, Answered, Pending }) => {
   // Switch Component Change Function
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    setSelected(event.target.value);
+  };
+  console.log(selected);
+
+  const onSubmit = event => {
+    event.preventDefault();
+    try {
+      postAnswer(qs, selected);
+      // dispatch(handleAnswer(qs.id, selected));
+      setSelected("");
+      setRedirect(true);
+    } catch (err) {
+      console.error(err);
+    }
+
+    // dispatch(saveQuestionAnswer);
+    // dispatch(handleAnswer(qs.id, selected));
+    // setVote(event.target.value);
+    // console.log(vote);
   };
 
-  console.log("GGGGGGGGGGGGGGGGGGGG", qs, users, dispatch, authedUser);
+  // console.log("GGGGGGGGGGGGGGGGGGGG", qs, users, dispatch, authedUser);
 
   useEffect(() => {
-    dispatch(recieveQuestions());
-    dispatch(recieveUsers());
+    setLoading(true);
+    Users();
+    Questions();
+    setLoading(false);
   }, []);
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (redirect) {
+    return <Redirect to="/questions" />;
+  }
 
   if (Answered) {
     return (
@@ -116,7 +159,7 @@ const Question = ({ qs, users, authedUser, dispatch, Answered, Pending }) => {
     // <Grid container className={classes.root}>
     //   <Grid>
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia
@@ -200,6 +243,21 @@ const Question = ({ qs, users, authedUser, dispatch, Answered, Pending }) => {
   );
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    postAnswer: (id, option) => {
+      dispatch(handleAnswer(id, option));
+    },
+    Users: () => {
+      dispatch(recieveUsers());
+    },
+
+    Questions: () => {
+      dispatch(recieveQuestions());
+    }
+  };
+}
+
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   const qs = questions[id];
 
@@ -216,4 +274,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(Question));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Question);
