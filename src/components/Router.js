@@ -7,6 +7,7 @@ import Login from "./Login";
 import LeaderBoard from "./LeaderBoard";
 import PostQuestion from "./PostQuestion";
 import Logout from "./Logout";
+import Votes from "./Votes";
 
 const Router = props => {
   const { loginUser } = props;
@@ -22,6 +23,7 @@ const Router = props => {
             <Route exact path="/questions" component={QuestionList} />
             <Route exact path="/leaderBoard" component={LeaderBoard} />
             <Route exact path="/post" component={PostQuestion} />
+            <Route exact path="/votes" component={Votes} />
           </Fragment>
         )}
       </Switch>

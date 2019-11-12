@@ -9,11 +9,11 @@ export const recieveQuestions = questions => {
   };
 };
 
-export function saveQuestionAnswer(authedUser, id, answer) {
+export function saveQuestionAnswer(authedUser, qid, answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
     authedUser,
-    id,
+    qid,
     answer
   };
 }

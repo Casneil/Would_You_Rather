@@ -31,17 +31,17 @@ export const handleAddQuestion = (optionOne, optionTwo) => {
   };
 };
 
-export function handleAnswer(id, option) {
+export function handleAnswer(qid, option) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
     const info = {
       authedUser: authedUser,
-      id,
+      qid,
       answer: option
     };
     _saveQuestionAnswer(info).then(() => {
-      dispatch(saveQuestionAnswer(authedUser, id, option));
-      dispatch(saveUserAnswer(authedUser, id, option));
+      dispatch(saveQuestionAnswer(authedUser, qid, option));
+      dispatch(saveUserAnswer(authedUser, qid, option));
     });
   };
 }

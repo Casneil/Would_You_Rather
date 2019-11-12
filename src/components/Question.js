@@ -12,7 +12,6 @@ import { formatQuestion } from "../api/helper";
 // MUI STUFF
 import { makeStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -59,23 +58,20 @@ const useStyles = makeStyles(theme => ({
 const Question = ({
   qs,
   users,
-  authedUser,
-  dispatch,
   Answered,
-  Pending,
-  saveQuestionAnswer,
   Users,
   Questions,
-  postAnswer
+  postAnswer,
+  choice
 }) => {
   const [selected, setSelected] = useState("");
+  const [click, setClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
-  // const { qs, users, authedUser, unAnswered, answered } = props;
 
   // Switch Component States
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     checkedA: false,
     checkedB: false
   });
@@ -84,26 +80,19 @@ const Question = ({
     setState({ ...state, [name]: event.target.checked });
     setSelected(event.target.value);
   };
-  console.log(selected);
 
   const onSubmit = event => {
     event.preventDefault();
     try {
-      postAnswer(qs, selected);
-      // dispatch(handleAnswer(qs.id, selected));
+      postAnswer(qs.id, selected);
       setSelected("");
       setRedirect(true);
     } catch (err) {
       console.error(err);
     }
 
-    // dispatch(saveQuestionAnswer);
-    // dispatch(handleAnswer(qs.id, selected));
-    // setVote(event.target.value);
     // console.log(vote);
   };
-
-  // console.log("GGGGGGGGGGGGGGGGGGGG", qs, users, dispatch, authedUser);
 
   useEffect(() => {
     setLoading(true);
@@ -116,7 +105,7 @@ const Question = ({
   }
 
   if (redirect) {
-    return <Redirect to="/questions" />;
+    return <Redirect to="/votes" />;
   }
 
   if (Answered) {
@@ -154,10 +143,7 @@ const Question = ({
       </div>
     );
   }
-
   return (
-    // <Grid container className={classes.root}>
-    //   <Grid>
     <div>
       <form onSubmit={onSubmit}>
         <Card className={classes.card}>
@@ -189,7 +175,7 @@ const Question = ({
                 <Switch
                   checked={state.checkedA}
                   onChange={handleChange("checkedA")}
-                  value={qs.optionOne.text}
+                  value={"optionOne"}
                   color="primary"
                   inputProps={{ "aria-label": "secondary checkbox" }}
                 />
@@ -212,7 +198,7 @@ const Question = ({
                 <Switch
                   checked={state.checkedB}
                   onChange={handleChange("checkedB")}
-                  value={qs.optionTwo.text}
+                  value={"optionTwo"}
                   color="primary"
                   inputProps={{ "aria-label": "secondary checkbox" }}
                 />
@@ -237,16 +223,13 @@ const Question = ({
         </Card>
       </form>
     </div>
-
-    //   </Grid>
-    // </Grid>
   );
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    postAnswer: (id, option) => {
-      dispatch(handleAnswer(id, option));
+    postAnswer: (id, choice) => {
+      dispatch(handleAnswer(id, choice));
     },
     Users: () => {
       dispatch(recieveUsers());
@@ -259,22 +242,19 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
+  let choice;
   const qs = questions[id];
+  const choices = users[authedUser].answers;
+  if (choices.hasOwnProperty(qs.id)) {
+    choice = choices[qs.id];
+  }
 
   return {
     qs,
     users: Object.values(users),
-    authedUser
-
-    //Before
-    // question: Object.keys(users),
-
-    // After
-    // question: formatQuestion(questions, users[questions.author], authedUser)
+    authedUser,
+    choice
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Question);
+export default connect(mapStateToProps, mapDispatchToProps)(Question);

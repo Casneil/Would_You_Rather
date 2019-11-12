@@ -10,19 +10,19 @@ export const recieveUsers = users => {
   };
 };
 
-export const addQuestion = (authedUser, id) => {
+export const addQuestion = (authedUser, qid) => {
   return {
     type: ADD_QUESTION,
-    id,
+    qid,
     authedUser
   };
 };
 
-export const saveUserAnswer = (authedUser, id, choice) => {
+export const saveUserAnswer = (authedUser, qid, option) => {
   return {
     type: ANSWER_QUESTION,
     authedUser,
-    choice,
-    id
+    option,
+    qid
   };
 };
