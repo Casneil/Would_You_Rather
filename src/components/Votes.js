@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { recieveQuestions } from "../actions/questions";
 
 // MUI Imports
 import PropTypes from "prop-types";
@@ -38,8 +39,33 @@ const useStyles = makeStyles({
 
 // image={users.find(user => user.id === qs.author).avatarURL}
 
-const Votes = ({ qs, users, authedUser }) => {
-  console.log("UUUUUSEEEERs", users);
+const Votes = ({ users, qs, authedUser }) => {
+  let vt;
+  const votes = qs.map(vote => {
+    vt = vote;
+    // console.log(vt);
+    // const two = vote.optionTwo.votes;
+    // const one = vote.optionOne.votes;
+    // return {
+    //   one,
+    //   two
+    // };
+  });
+
+  //   const e = vote;
+  //   useEffect(() => {
+  //     Questions();
+  //   }, []);
+
+  let one = vt.optionOne.votes.length;
+  let two = vt.optionTwo.votes.length;
+
+  const percentage = (first, second) => {
+    return Math.floor((first / second) * 100);
+  };
+  const allVotesPercent = percentage(one, two);
+
+  console.log("AAAAAL VOOOTes:", allVotesPercent);
   const value = 2;
 
   const classes = useStyles();
@@ -49,7 +75,9 @@ const Votes = ({ qs, users, authedUser }) => {
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">Ratings</Typography>
 
-        {users.map(user => (
+        <div>{users.find(user => user.id === vt.author).avatarURL}</div>
+
+        {/* {users.map((user) => (
           <div>
             <Avatar
               alt="Remy Sharp"
@@ -59,7 +87,7 @@ const Votes = ({ qs, users, authedUser }) => {
             {user.name}
             <Rating name="read-only" value={value} readOnly />
           </div>
-        ))}
+        ))} */}
       </Box>
     </div>
   );
@@ -79,13 +107,27 @@ IconContainer.propTypes = {
 };
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
-  const qs = questions[id];
+  const user = users[authedUser];
+  const qs = Object.values(questions);
+
+  //   const answered = Object.keys(user.answers).sort(
+  //     (a, b) => questions[b].timestamp - questions[a].timestamp
+  //   );
 
   return {
-    qs,
+    // answered,
     users: Object.values(users),
-    authedUser
+    authedUser,
+    qs
   };
 }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     Questions: () => {
+//       dispatch(recieveQuestions());
+//     }
+//   };
+// }
 
 export default connect(mapStateToProps)(Votes);

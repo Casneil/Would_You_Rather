@@ -65,6 +65,8 @@ const Question = ({
   choice
 }) => {
   const [selected, setSelected] = useState("");
+  // const allVotes = qs.optionOne.votes.length + qs.optionOne.votes.length;
+  // console.log("POOOOOL", allVotes);
   const [click, setClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);

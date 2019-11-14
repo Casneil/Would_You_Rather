@@ -24,8 +24,8 @@ export const questions = (state = {}, action, question) => {
         [qid]: {
           ...state[qid],
           [answer]: {
-            ...state[qid][answer]
-            // votes: state[qid][answer].votes.concat([authedUser])
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat([authedUser])
           }
         }
       };

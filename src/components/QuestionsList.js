@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 const QuestionsList = ({ pending, answered }) => {
   const [value, setValue] = useState(0);
-  console.log("HHHHHHHHHHHHHHH", answered, pending);
+  // console.log("HHHHHHHHHHHHHHH", answered);
 
   // const { questionID, questions, pending, answered } = props;
 
