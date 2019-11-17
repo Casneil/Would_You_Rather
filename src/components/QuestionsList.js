@@ -98,24 +98,24 @@ const QuestionsList = ({ pending, answered }) => {
           aria-label="add"
           className={classes.fab}
           component={Link}
-          to="/post"
+          to="/add"
         >
           <AddIcon />
         </Fab>
       </Tooltip>
       <Grid Grid container className={classes.root}>
         {value === 0
-          ? pending.map(id => (
+          ? pending.map(qid => (
               <Grid>
                 <>
-                  <Question id={id} Pending={pending} />
+                  <Question id={qid} Pending={pending} />
                 </>
               </Grid>
             ))
-          : answered.map(id => (
+          : answered.map(qid => (
               <Grid>
                 <>
-                  <Question id={id} Answered={answered} />
+                  <Question id={qid} Answered={answered} />
                 </>
               </Grid>
             ))}
@@ -145,7 +145,7 @@ function mapStateToProps({ questions, users, authedUser }) {
     ),
     // questions
     pending: Object.keys(questions)
-      .filter(id => !answered.includes(id))
+      .filter(qid => !answered.includes(qid))
       .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
     answered
   };

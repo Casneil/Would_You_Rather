@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link } from "react-router-dom";
 import { recieveQuestions } from "../actions/questions";
 import { recieveUsers } from "../actions/users";
 import { handleAnswer } from "../actions/shared";
@@ -52,6 +52,10 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1)
+  },
+
+  links: {
+    textDecoration: "none"
   }
 }));
 
@@ -66,7 +70,7 @@ const Question = ({
 }) => {
   const [selected, setSelected] = useState("");
   // const allVotes = qs.optionOne.votes.length + qs.optionOne.votes.length;
-  // console.log("POOOOOL", allVotes);
+  // console.log("POOOOOL", ques);
   const [click, setClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -107,41 +111,47 @@ const Question = ({
   }
 
   if (redirect) {
-    return <Redirect to="/votes" />;
+    // let link = <Link to={`/votes${qs.qid}`}></Link>;
+    return <Redirect to={`/votes/${qs.id}`} />;
   }
 
   if (Answered) {
     return (
       <div>
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.img}
-              component="img"
-              alt="author"
-              height="140"
-              title={qs.author}
-              image={users.find(user => user.id === qs.author).avatarURL}
-            />
+        <Link to={`/votes/${qs.id}`} className={classes.links}>
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.img}
+                component="img"
+                alt="author"
+                height="140"
+                title={qs.author}
+                image={users.find(user => user.id === qs.author).avatarURL}
+              />
 
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {qs.author}
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {qs.author}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions></CardActions>
+            <Tooltip title="View Pool">
+              <Typography variant="body2" color="textSecondary" component="p">
+                {qs.optionOne.text}
               </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions></CardActions>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {qs.optionOne.text}
-          </Typography>
+            </Tooltip>
 
-          {/* {qs.optionOne.votes} */}
-
-          <Typography variant="body2" color="textSecondary" component="p">
-            {qs.optionTwo.text}
-          </Typography>
-          <br />
-        </Card>
+            {/* {qs.optionOne.votes} */}
+            <Tooltip title="View Pool">
+              <Typography variant="body2" color="textSecondary" component="p">
+                {qs.optionTwo.text}
+              </Typography>
+            </Tooltip>
+            <br />
+          </Card>
+        </Link>
       </div>
     );
   }
@@ -224,6 +234,7 @@ const Question = ({
           )}
         </Card>
       </form>
+      -
     </div>
   );
 };
@@ -246,17 +257,21 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   let choice;
   const qs = questions[id];
-  const choices = users[authedUser].answers;
-  if (choices.hasOwnProperty(qs.id)) {
-    choice = choices[qs.id];
-  }
+
+  // const choices = users[authedUser].answers;
+  // if (choices.hasOwnProperty(qs.id)) {
+  //   choice = choices[qs.id];
+  // }
 
   return {
     qs,
     users: Object.values(users),
-    authedUser,
-    choice
+    authedUser
+
+    // choice
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Question)
+);

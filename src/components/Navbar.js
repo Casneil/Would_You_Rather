@@ -68,7 +68,7 @@ const Navbar = ({ users, authedUser }) => {
                   className={classes.menuButton}
                   color="inherit"
                   component={Link}
-                  to="/leaderBoard"
+                  to="/leaderboard"
                 >
                   <EqualizerIcon />
                 </Button>

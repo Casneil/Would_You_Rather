@@ -21,9 +21,9 @@ const Router = props => {
           <Fragment>
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/questions" component={QuestionList} />
-            <Route exact path="/leaderBoard" component={LeaderBoard} />
-            <Route exact path="/post" component={PostQuestion} />
-            <Route exact path="/votes" component={Votes} />
+            <Route exact path="/leaderboard" component={LeaderBoard} />
+            <Route exact path="/add" component={PostQuestion} />
+            <Route exact path="/votes/:id" component={Votes} />
           </Fragment>
         )}
       </Switch>

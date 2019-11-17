@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { recieveQuestions } from "../actions/questions";
+import { handleAnswer } from "../actions/shared";
+import { withRouter, Redirect } from "react-router-dom";
 
 // MUI Imports
 import PropTypes from "prop-types";
@@ -39,8 +41,10 @@ const useStyles = makeStyles({
 
 // image={users.find(user => user.id === qs.author).avatarURL}
 
-const Votes = ({ users, qs, authedUser }) => {
+const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
   let vt;
+  let id;
+  console.log("IIIIIIIDDDDD", match);
   const votes = qs.map(vote => {
     vt = vote;
     // console.log(vt);
@@ -51,21 +55,27 @@ const Votes = ({ users, qs, authedUser }) => {
     //   two
     // };
   });
+  // const ids = ques.map(q => {
+  //   id = q.id;
+  // });
 
   //   const e = vote;
   //   useEffect(() => {
   //     Questions();
   //   }, []);
 
-  let one = vt.optionOne.votes.length;
-  let two = vt.optionTwo.votes.length;
-
   const percentage = (first, second) => {
     return Math.floor((first / second) * 100);
   };
-  const allVotesPercent = percentage(one, two);
 
-  console.log("AAAAAL VOOOTes:", allVotesPercent);
+  const one = vt.optionOne.votes.length;
+  const two = vt.optionTwo.votes.length;
+  const allVotes = one + two;
+
+  const percentOne = percentage(one, allVotes);
+  const percentTwo = percentage(two, allVotes);
+
+  // console.log("AAAAAL VOOOTes:", percentOne, percentTwo, "SElected: ", id);
   const value = 2;
 
   const classes = useStyles();
@@ -74,9 +84,13 @@ const Votes = ({ users, qs, authedUser }) => {
     <div className={classes.rating}>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">Ratings</Typography>
-
-        <div>{users.find(user => user.id === vt.author).avatarURL}</div>
-
+        // Need to find just the user of the questin not the user who answered
+        the questions
+        {ques.optionOne.votes}
+        {/* <div>{users.find(user => user.id === vt.author).avatarURL}</div> */}
+        {/* <div>
+          <h1>{users.find(ques => authedUser === users).answers}</h1>
+        </div> */}
         {/* {users.map((user) => (
           <div>
             <Avatar
@@ -106,9 +120,14 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired
 };
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, props) {
   const user = users[authedUser];
+  const { id } = props.match.params;
   const qs = Object.values(questions);
+  let choice = questions[id];
+  const ques = questions[id];
+  //   let author = "";
+  //   author = users[choice["author"]];
 
   //   const answered = Object.keys(user.answers).sort(
   //     (a, b) => questions[b].timestamp - questions[a].timestamp
@@ -118,14 +137,18 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
     // answered,
     users: Object.values(users),
     authedUser,
-    qs
+    qs,
+    ques,
+    // ques: questions[id.match.params.id],
+    choice
   };
 }
 
-// function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch, props) {
+//   const { id } = props.match.params;
 //   return {
-//     Questions: () => {
-//       dispatch(recieveQuestions());
+//     postAnswer: (id, choice) => {
+//       dispatch(handleAnswer(id, choice));
 //     }
 //   };
 // }
