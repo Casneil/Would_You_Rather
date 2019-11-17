@@ -111,7 +111,6 @@ const Question = ({
   }
 
   if (redirect) {
-    // let link = <Link to={`/votes${qs.qid}`}></Link>;
     return <Redirect to={`/votes/${qs.id}`} />;
   }
 
@@ -138,14 +137,21 @@ const Question = ({
             </CardActionArea>
             <CardActions></CardActions>
             <Tooltip title="View Pool">
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                fontSize="h6.fontSize"
+                color="textSecondary"
+                component="p"
+              >
                 {qs.optionOne.text}
               </Typography>
             </Tooltip>
 
-            {/* {qs.optionOne.votes} */}
             <Tooltip title="View Pool">
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                fontSize="h6.fontSize"
+                color="textSecondary"
+                component="p"
+              >
                 {qs.optionTwo.text}
               </Typography>
             </Tooltip>
@@ -195,8 +201,6 @@ const Question = ({
             </Tooltip>
           </Typography>
           {qs.optionOne.text}
-
-          {/* {qs.optionOne.votes} */}
 
           <Typography variant="body2" color="textSecondary" component="p">
             <Tooltip title="Option Two" placement="right-end">

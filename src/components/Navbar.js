@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = ({ users, authedUser }) => {
   const classes = useStyles();
-  // const { users, authedUser } = props;
 
   return (
     <div className={classes.root}>
@@ -41,16 +40,16 @@ const Navbar = ({ users, authedUser }) => {
         <Toolbar>
           {authedUser ? (
             <>
-              <Tooltip title="Home">
-                <Button
+              {/* <Tooltip title="Home"> */}
+              {/* <Button
                   className={classes.menuButton}
                   color="inherit"
                   component={Link}
                   to="/"
-                >
-                  <HomeIcon />
-                </Button>
-              </Tooltip>
+                > */}
+              {/* <HomeIcon />
+                </Button> */}
+              {/* </Tooltip> */}
 
               <Tooltip title="Questions">
                 <Button

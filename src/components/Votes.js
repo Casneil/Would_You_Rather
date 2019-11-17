@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+
 import { recieveQuestions } from "../actions/questions";
 import { handleAnswer } from "../actions/shared";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link } from "react-router-dom";
 
 // MUI Imports
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Avatar from "@material-ui/core/Avatar";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 
-const labels = {
-  0.5: "Useless",
-  1: "Useless+",
-  1.5: "Poor",
-  2: "Poor+",
-  2.5: "Ok",
-  3: "Ok+",
-  3.5: "Good",
-  4: "Good+",
-  4.5: "Excellent",
-  5: "Excellent+"
-};
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   rating1: {
     width: 200,
     display: "flex",
@@ -36,33 +26,28 @@ const useStyles = makeStyles({
     margin: 10,
     width: 60,
     height: 60
+  },
+  card: {
+    maxWidth: 545,
+    minWidth: "auto",
+    margin: "auto",
+    marginTop: 40,
+    objectFit: "cover",
+    paddingBottom: 0
+  },
+  img: {
+    height: "5%",
+    margin: 0
+    // borderRadius: "100%"
   }
-});
-
-// image={users.find(user => user.id === qs.author).avatarURL}
+}));
 
 const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
   let vt;
-  let id;
   console.log("IIIIIIIDDDDD", match);
   const votes = qs.map(vote => {
     vt = vote;
-    // console.log(vt);
-    // const two = vote.optionTwo.votes;
-    // const one = vote.optionOne.votes;
-    // return {
-    //   one,
-    //   two
-    // };
   });
-  // const ids = ques.map(q => {
-  //   id = q.id;
-  // });
-
-  //   const e = vote;
-  //   useEffect(() => {
-  //     Questions();
-  //   }, []);
 
   const percentage = (first, second) => {
     return Math.floor((first / second) * 100);
@@ -75,58 +60,54 @@ const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
   const percentOne = percentage(one, allVotes);
   const percentTwo = percentage(two, allVotes);
 
-  // console.log("AAAAAL VOOOTes:", percentOne, percentTwo, "SElected: ", id);
-  const value = 2;
+  const value1 = percentOne / 10;
+  const value2 = percentTwo / 10;
 
   const classes = useStyles();
 
   return (
-    <div className={classes.rating}>
+    <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">
-          Ratings:{ques.optionOne.votes}
-        </Typography>
-        // Need to find just the user of the questin not the user who answered
-        the questions
-        {/* <div>{users.find(user => user.id === vt.author).avatarURL}</div> */}
-        {/* <div>
-          <h1>{users.find(ques => authedUser === users).answers}</h1>
-        </div> */}
-        {/* {users.map((user) => (
-          <div>
-            <Avatar
-              alt="Remy Sharp"
-              src={user.avatarURL}
-              className={classes.bigAvatar}
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.img}
+              component="img"
+              alt="author"
+              height="140"
+              title={ques.author}
+              image={users.find(user => user.id === ques.author).avatarURL}
             />
-            {user.name}
-            <Rating name="read-only" value={value} readOnly />
-          </div>
-        ))} */}
+
+            <CardContent></CardContent>
+          </CardActionArea>
+          <Tooltip title={`${percentOne} % all votes`} placement="right-end">
+            <Typography fontSize="h6.fontSize">
+              {ques.optionOne.text}
+              <br />
+              <Rating name="read-only" value={value1} readOnly />
+            </Typography>
+          </Tooltip>
+          <Tooltip title={`${percentTwo} % all votes`} placement="right-end">
+            <Typography fontSize="h6.fontSize">
+              {ques.optionTwo.text}
+              <br />
+              <Rating name="read-only" value={value2} readOnly />
+            </Typography>
+          </Tooltip>
+        </Card>
       </Box>
     </div>
   );
 };
 
-function IconContainer(props) {
-  const { value, ...other } = props;
-  return (
-    <Tooltip title={labels[value] || ""}>
-      <span {...other} />
-    </Tooltip>
-  );
-}
-
-IconContainer.propTypes = {
-  value: PropTypes.number.isRequired
-};
-
 function mapStateToProps({ authedUser, users, questions }, props) {
-  const user = users[authedUser];
+  // const user = users[authedUser];
   const { id } = props.match.params;
   const qs = Object.values(questions);
   let choice = questions[id];
   const ques = questions[id];
+
   //   let author = "";
   //   author = users[choice["author"]];
 
@@ -140,18 +121,8 @@ function mapStateToProps({ authedUser, users, questions }, props) {
     authedUser,
     qs,
     ques,
-    // ques: questions[id.match.params.id],
     choice
   };
 }
-
-// function mapDispatchToProps(dispatch, props) {
-//   const { id } = props.match.params;
-//   return {
-//     postAnswer: (id, choice) => {
-//       dispatch(handleAnswer(id, choice));
-//     }
-//   };
-// }
 
 export default connect(mapStateToProps)(Votes);

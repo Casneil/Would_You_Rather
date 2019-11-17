@@ -23,8 +23,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LeaderBoard = props => {
-  const { users } = props;
+const LeaderBoard = ({ users }) => {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>

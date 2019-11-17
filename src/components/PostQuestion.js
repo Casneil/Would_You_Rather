@@ -30,8 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PostQuestion = props => {
-  const { postQuestion } = props;
+const PostQuestion = ({ postQuestion }) => {
   const classes = useStyles();
   const [optionOneText, setOptionOne] = useState("");
   const [optionTwoText, setOptionTwo] = useState("");
@@ -124,9 +123,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(PostQuestion)
-);
+export default withRouter(connect(null, mapDispatchToProps)(PostQuestion));
