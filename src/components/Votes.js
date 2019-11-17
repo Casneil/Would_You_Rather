@@ -83,10 +83,11 @@ const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
   return (
     <div className={classes.rating}>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Ratings</Typography>
+        <Typography component="legend">
+          Ratings:{ques.optionOne.votes}
+        </Typography>
         // Need to find just the user of the questin not the user who answered
         the questions
-        {ques.optionOne.votes}
         {/* <div>{users.find(user => user.id === vt.author).avatarURL}</div> */}
         {/* <div>
           <h1>{users.find(ques => authedUser === users).answers}</h1>
