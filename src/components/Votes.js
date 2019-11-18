@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-
-import { recieveQuestions } from "../actions/questions";
-import { handleAnswer } from "../actions/shared";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // MUI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,6 +12,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   rating1: {
@@ -39,22 +37,19 @@ const useStyles = makeStyles(theme => ({
     height: "5%",
     margin: 0
     // borderRadius: "100%"
+  },
+  button: {
+    marginTop: 20
   }
 }));
 
-const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
-  let vt;
-  console.log("IIIIIIIDDDDD", match);
-  const votes = qs.map(vote => {
-    vt = vote;
-  });
-
+const Votes = ({ users, ques, match }) => {
   const percentage = (first, second) => {
     return Math.floor((first / second) * 100);
   };
 
-  const one = vt.optionOne.votes.length;
-  const two = vt.optionTwo.votes.length;
+  const one = ques.optionOne.votes.length;
+  const two = ques.optionTwo.votes.length;
   const allVotes = one + two;
 
   const percentOne = percentage(one, allVotes);
@@ -81,47 +76,65 @@ const Votes = ({ users, qs, authedUser, ques, choice, match }) => {
 
             <CardContent></CardContent>
           </CardActionArea>
-          <Tooltip title={`${percentOne} % all votes`} placement="right-end">
+          <Tooltip
+            title={`${one} ${
+              one > 1 ? "votes" : "vote"
+            } ${percentOne} % all votes`}
+            placement="right-end"
+          >
             <Typography fontSize="h6.fontSize">
               {ques.optionOne.text}
               <br />
-              <Rating name="read-only" value={value1} readOnly />
+              <Rating
+                name="read-only"
+                value={value1}
+                readOnly
+                max={10}
+                precision={0.5}
+              />
             </Typography>
           </Tooltip>
-          <Tooltip title={`${percentTwo} % all votes`} placement="right-end">
+          <Tooltip
+            title={`${two} ${
+              two > 1 ? "votes" : "vote"
+            } ${percentTwo} % of all votes`}
+            placement="right-end"
+          >
             <Typography fontSize="h6.fontSize">
               {ques.optionTwo.text}
               <br />
-              <Rating name="read-only" value={value2} readOnly />
+              <Rating
+                name="read-only"
+                value={value2}
+                readOnly
+                max={10}
+                precision={0.5}
+              />
             </Typography>
           </Tooltip>
         </Card>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          component={Link}
+          to="/questions"
+        >
+          Go Back
+        </Button>
       </Box>
     </div>
   );
 };
 
 function mapStateToProps({ authedUser, users, questions }, props) {
-  // const user = users[authedUser];
   const { id } = props.match.params;
-  const qs = Object.values(questions);
-  let choice = questions[id];
+
   const ques = questions[id];
-
-  //   let author = "";
-  //   author = users[choice["author"]];
-
-  //   const answered = Object.keys(user.answers).sort(
-  //     (a, b) => questions[b].timestamp - questions[a].timestamp
-  //   );
-
   return {
-    // answered,
     users: Object.values(users),
     authedUser,
-    qs,
-    ques,
-    choice
+    ques
   };
 }
 

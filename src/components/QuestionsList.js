@@ -37,9 +37,6 @@ const useStyles = makeStyles(theme => ({
 
 const QuestionsList = ({ pending, answered }) => {
   const [value, setValue] = useState(0);
-  // console.log("HHHHHHHHHHHHHHH", answered);
-
-  // const { questionID, questions, pending, answered } = props;
 
   const classes = useStyles();
 
@@ -120,16 +117,6 @@ const QuestionsList = ({ pending, answered }) => {
               </Grid>
             ))}
       </Grid>
-      {
-        //// Getting All Questions
-        /* {questionID.map(id => (
-          <Grid>
-            <h3 key={id}>
-              <Question id={id} />
-            </h3>
-          </Grid>
-        ))} */
-      }
     </div>
   );
 };

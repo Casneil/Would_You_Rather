@@ -6,7 +6,6 @@ import { recieveUsers } from "../actions/users";
 import { handleAnswer } from "../actions/shared";
 import Loading from "./Loading";
 
-// import { question } from "../reducers/questionsReducer";
 import { formatQuestion } from "../api/helper";
 
 // MUI STUFF
@@ -59,19 +58,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Question = ({
-  qs,
-  users,
-  Answered,
-  Users,
-  Questions,
-  postAnswer,
-  choice
-}) => {
+const Question = ({ qs, users, Answered, Users, Questions, postAnswer }) => {
   const [selected, setSelected] = useState("");
-  // const allVotes = qs.optionOne.votes.length + qs.optionOne.votes.length;
-  // console.log("POOOOOL", ques);
-  const [click, setClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
@@ -96,8 +84,6 @@ const Question = ({
     } catch (err) {
       console.error(err);
     }
-
-    // console.log(vote);
   };
 
   useEffect(() => {
@@ -259,20 +245,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
-  let choice;
   const qs = questions[id];
-
-  // const choices = users[authedUser].answers;
-  // if (choices.hasOwnProperty(qs.id)) {
-  //   choice = choices[qs.id];
-  // }
-
   return {
     qs,
     users: Object.values(users),
     authedUser
-
-    // choice
   };
 }
 

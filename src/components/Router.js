@@ -5,6 +5,7 @@ import QuestionList from "./QuestionsList";
 import WelcomeCard from "./WelcomeCard";
 import Login from "./Login";
 import LeaderBoard from "./LeaderBoard";
+import ServerError from "./404";
 import PostQuestion from "./PostQuestion";
 import Logout from "./Logout";
 import Votes from "./Votes";
@@ -26,6 +27,7 @@ const Router = props => {
             <Route exact path="/votes/:id" component={Votes} />
           </Fragment>
         )}
+        <Route component={ServerError} />
       </Switch>
     </div>
   );
@@ -38,7 +40,3 @@ function mapStateToProps({ users, authedUser }) {
   };
 }
 export default withRouter(connect(mapStateToProps)(Router));
-
-{
-  /* <Route path="*">             <NoMatch />           </Route> */
-}
