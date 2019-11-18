@@ -2,11 +2,12 @@
   "name": "would-you-rather",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://casneil.github.io/Would_You_Rather",
+  "homepage": "https://casneil.github.io/Would_You_Rather/",
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
     "@material-ui/lab": "^4.0.0-alpha.32",
+    "gh-pages": "^2.1.1",
     "install": "^0.13.0",
     "material-table": "^1.53.0",
     "react": "^16.10.2",
@@ -21,9 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "yarn run build && gh-pages -d build",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -25,7 +25,7 @@ const Router = ({ loginUser }) => {
             <Route exact path="/votes/:id" component={Votes} />
           </Fragment>
         )}
-        <Route component={ServerError} />
+        <Route path="/" component={ServerError} />
       </Switch>
     </div>
   );
