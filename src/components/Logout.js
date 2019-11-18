@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { deleteAuthedUser } from "../actions/authedUser";
 
-const Logout = props => {
+const Logout = ({ dispatch }) => {
   useEffect(() => {
-    props.dispatch(deleteAuthedUser());
+    dispatch(deleteAuthedUser());
   }, []);
   return <Redirect to="/" />;
 };

@@ -6,7 +6,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import HomeIcon from "@material-ui/icons/Home";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import { Tooltip } from "@material-ui/core";
@@ -40,17 +39,6 @@ const Navbar = ({ users, authedUser }) => {
         <Toolbar>
           {authedUser ? (
             <>
-              {/* <Tooltip title="Home"> */}
-              {/* <Button
-                  className={classes.menuButton}
-                  color="inherit"
-                  component={Link}
-                  to="/"
-                > */}
-              {/* <HomeIcon />
-                </Button> */}
-              {/* </Tooltip> */}
-
               <Tooltip title="Questions">
                 <Button
                   className={classes.menuButton}

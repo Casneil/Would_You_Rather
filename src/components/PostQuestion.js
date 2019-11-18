@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
-import { handleAddQuestion } from "../actions/shared";
+import { AddQuestion } from "../actions/shared";
 import QuestionsPic from "../images/quesPic.jpg";
+import Loading from "./Loading";
 
 // Material UI
 import { Tooltip } from "@material-ui/core";
@@ -35,6 +36,7 @@ const PostQuestion = ({ postQuestion }) => {
   const [optionOneText, setOptionOne] = useState("");
   const [optionTwoText, setOptionTwo] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const optionOneChange = event => {
     event.preventDefault();
@@ -52,8 +54,14 @@ const PostQuestion = ({ postQuestion }) => {
     //Clear text field after Submition
     setOptionOne("");
     setOptionTwo("");
+    setLoad(true);
     setRedirect(true);
+    setLoad(false);
   };
+
+  if (load) {
+    return <Loading />;
+  }
 
   if (redirect) {
     return <Redirect to="/questions" />;
@@ -118,7 +126,7 @@ const PostQuestion = ({ postQuestion }) => {
 function mapDispatchToProps(dispatch) {
   return {
     postQuestion: (optionOne, optionTwo) => {
-      dispatch(handleAddQuestion(optionOne, optionTwo));
+      dispatch(AddQuestion(optionOne, optionTwo));
     }
   };
 }

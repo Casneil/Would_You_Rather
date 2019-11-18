@@ -55,7 +55,7 @@ let questions = {
   "8xf0y6ziyjabvozdd253cd": {
     id: "8xf0y6ziyjabvozdd253cd",
     author: "casneil",
-    timestamp: 2067166872634,
+    timestamp: 1067166872634,
     optionOne: {
       votes: ["sarahedo", "johndoe"],
       text: "Learn React/-Native"

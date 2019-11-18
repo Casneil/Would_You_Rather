@@ -10,9 +10,7 @@ import PostQuestion from "./PostQuestion";
 import Logout from "./Logout";
 import Votes from "./Votes";
 
-const Router = props => {
-  const { loginUser } = props;
-
+const Router = ({ loginUser }) => {
   return (
     <div>
       <Switch>

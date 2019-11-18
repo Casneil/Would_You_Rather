@@ -6,30 +6,26 @@ import Router from "./Router";
 import "../App.css";
 
 //MUI Imports
-import LoadingBar from "./Loading";
 import Navbar from "./Navbar";
 
-const App = props => {
+const App = ({ authedUser, initialData }) => {
   useEffect(() => {
-    props.initialData();
+    initialData();
   }, []);
-  const { authedUser, users } = props;
 
   return (
     <BrowserRouter>
       <div className="App">
         <Navbar />
         <Router loginUser={authedUser} />
-        {/* <Login /> */}
       </div>
     </BrowserRouter>
   );
 };
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    authedUser,
-    users
+    authedUser
   };
 }
 
@@ -41,9 +37,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
-
-// Add uctionality to Add new users and users photo
+export default connect(mapStateToProps, mapDispatchToProps)(App);

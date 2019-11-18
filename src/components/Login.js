@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Redirect, withRouter } from "react-router-dom";
 import Cover from "../images/cover.jpg";
+import Loading from "./Loading";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,8 +34,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = ({ login, users, authedUser }) => {
-  // console.log(authedUser);
-
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 
@@ -44,7 +43,7 @@ const Login = ({ login, users, authedUser }) => {
   const onSubmit = event => {
     event.preventDefault();
     {
-      user ? login(user) : alert("Cannot be empty!");
+      user && login(user);
     }
   };
 
@@ -118,9 +117,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Login)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

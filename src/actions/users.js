@@ -18,7 +18,7 @@ export const addQuestion = (authedUser, qid) => {
   };
 };
 
-export const saveUserAnswer = (authedUser, qid, option) => {
+export const saveAnswer = (authedUser, qid, option) => {
   return {
     type: ANSWER_QUESTION,
     authedUser,

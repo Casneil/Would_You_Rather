@@ -4,7 +4,7 @@ import {
   postQuestion,
   saveQuestionAnswer
 } from "../actions/questions";
-import { recieveUsers, addQuestion, saveUserAnswer } from "../actions/users";
+import { recieveUsers, addQuestion, saveAnswer } from "../actions/users";
 import { _saveQuestion, _saveQuestionAnswer } from "../api/_DATA";
 
 export const initialData = () => {
@@ -16,7 +16,7 @@ export const initialData = () => {
   };
 };
 
-export const handleAddQuestion = (optionOne, optionTwo) => {
+export const AddQuestion = (optionOne, optionTwo) => {
   return (dispatch, getState) => {
     const { authedUser } = getState();
 
@@ -41,7 +41,7 @@ export function handleAnswer(qid, option) {
     };
     _saveQuestionAnswer(info).then(() => {
       dispatch(saveQuestionAnswer(authedUser, qid, option));
-      dispatch(saveUserAnswer(authedUser, qid, option));
+      dispatch(saveAnswer(authedUser, qid, option));
     });
   };
 }

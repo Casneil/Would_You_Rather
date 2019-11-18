@@ -9,7 +9,6 @@ import { blue } from "@material-ui/core/colors";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import image from "../svg/casneil.svg";
-// import { recieveUsers } from "../actions/users";
 
 const useStyles = makeStyles(theme => ({
   card: {
