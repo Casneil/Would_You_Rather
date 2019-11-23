@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ login, users, authedUser }) => {
+const Login = ({ login, users, authedUser, location }) => {
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 
@@ -56,7 +56,11 @@ const Login = ({ login, users, authedUser }) => {
   }, []);
 
   if (authedUser) {
-    return <Redirect to="/questions" />;
+    let url =
+      location.state && location.state.from
+        ? location.state.from
+        : "/questions";
+    return <Redirect to={url} />;
   }
   return (
     <div>

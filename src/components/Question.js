@@ -97,13 +97,13 @@ const Question = ({ qs, users, Answered, Users, Questions, postAnswer }) => {
   }
 
   if (redirect) {
-    return <Redirect to={`/votes/${qs.id}`} />;
+    return <Redirect to={`/questions/${qs.id}`} />;
   }
 
   if (Answered) {
     return (
       <div>
-        <Link to={`/votes/${qs.id}`} className={classes.links}>
+        <Link to={`/questions/${qs.id}`} className={classes.links}>
           <Card className={classes.card}>
             <CardActionArea>
               <CardMedia
@@ -246,6 +246,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   const qs = questions[id];
+
   return {
     qs,
     users: Object.values(users),

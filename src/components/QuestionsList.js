@@ -103,18 +103,18 @@ const QuestionsList = ({ pending, answered }) => {
       <Grid Grid container className={classes.root}>
         {value === 0
           ? pending.map(qid => (
-              <Grid>
-                <>
+              <div key={qid}>
+                <Grid>
                   <Question id={qid} Pending={pending} />
-                </>
-              </Grid>
+                </Grid>
+              </div>
             ))
           : answered.map(qid => (
-              <Grid>
-                <>
+              <div key={qid}>
+                <Grid>
                   <Question id={qid} Answered={answered} />
-                </>
-              </Grid>
+                </Grid>
+              </div>
             ))}
       </Grid>
     </div>

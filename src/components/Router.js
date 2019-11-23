@@ -9,6 +9,7 @@ import ServerError from "./404";
 import PostQuestion from "./PostQuestion";
 import Logout from "./Logout";
 import Votes from "./Votes";
+import PrivateRoute from "./PrivateRoutes";
 
 const Router = ({ loginUser }) => {
   return (
@@ -16,15 +17,15 @@ const Router = ({ loginUser }) => {
       <Switch>
         <Route exact path="/" component={WelcomeCard} />
         <Route exact path="/login" component={Login} />
-        {loginUser && (
-          <Fragment>
-            <Route exact path="/logout" component={Logout} />
-            <Route exact path="/questions" component={QuestionList} />
-            <Route exact path="/leaderboard" component={LeaderBoard} />
-            <Route exact path="/add" component={PostQuestion} />
-            <Route exact path="/votes/:id" component={Votes} />
-          </Fragment>
-        )}
+        {/* {loginUser && ( */}
+        {/* <Fragment> */}
+        <PrivateRoute exact path="/logout" component={Logout} />
+        <PrivateRoute exact path="/questions" component={QuestionList} />
+        <PrivateRoute exact path="/questions/:id" component={Votes} />
+        <PrivateRoute exact path="/leaderboard" component={LeaderBoard} />
+        <PrivateRoute exact path="/add" component={PostQuestion} />
+        {/* </Fragment> */}
+        {/* )} */}
         <Route path="/" component={ServerError} />
       </Switch>
     </div>
