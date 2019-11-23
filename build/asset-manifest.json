@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Would_You_Rather/static/css/main.7f0e9e84.chunk.css",
-    "main.js": "/Would_You_Rather/static/js/main.708222ff.chunk.js",
-    "main.js.map": "/Would_You_Rather/static/js/main.708222ff.chunk.js.map",
+    "main.js": "/Would_You_Rather/static/js/main.62c311b9.chunk.js",
+    "main.js.map": "/Would_You_Rather/static/js/main.62c311b9.chunk.js.map",
     "runtime-main.js": "/Would_You_Rather/static/js/runtime-main.ed79ba51.js",
     "runtime-main.js.map": "/Would_You_Rather/static/js/runtime-main.ed79ba51.js.map",
-    "static/js/2.d52cf437.chunk.js": "/Would_You_Rather/static/js/2.d52cf437.chunk.js",
-    "static/js/2.d52cf437.chunk.js.map": "/Would_You_Rather/static/js/2.d52cf437.chunk.js.map",
+    "static/js/2.8ec59abc.chunk.js": "/Would_You_Rather/static/js/2.8ec59abc.chunk.js",
+    "static/js/2.8ec59abc.chunk.js.map": "/Would_You_Rather/static/js/2.8ec59abc.chunk.js.map",
     "index.html": "/Would_You_Rather/index.html",
-    "precache-manifest.90f3c43c7f38a97de8f1ea93ebb791e5.js": "/Would_You_Rather/precache-manifest.90f3c43c7f38a97de8f1ea93ebb791e5.js",
+    "precache-manifest.8724782c4dd9e733ec1bd53abe4fd180.js": "/Would_You_Rather/precache-manifest.8724782c4dd9e733ec1bd53abe4fd180.js",
     "service-worker.js": "/Would_You_Rather/service-worker.js",
     "static/css/main.7f0e9e84.chunk.css.map": "/Would_You_Rather/static/css/main.7f0e9e84.chunk.css.map",
     "static/media/ben.svg": "/Would_You_Rather/static/media/ben.bb259ac1.svg",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ed79ba51.js",
-    "static/js/2.d52cf437.chunk.js",
+    "static/js/2.8ec59abc.chunk.js",
     "static/css/main.7f0e9e84.chunk.css",
-    "static/js/main.708222ff.chunk.js"
+    "static/js/main.62c311b9.chunk.js"
   ]
 }

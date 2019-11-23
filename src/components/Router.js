@@ -11,7 +11,8 @@ import Logout from "./Logout";
 import Votes from "./Votes";
 import PrivateRoute from "./PrivateRoutes";
 
-const Router = () => {
+const Router = ({ authedUser, users }) => {
+  console.log(users, authedUser);
   return (
     <div>
       <Switch>
@@ -22,7 +23,7 @@ const Router = () => {
         <PrivateRoute exact path="/questions/:id" component={Votes} />
         <PrivateRoute exact path="/leaderboard" component={LeaderBoard} />
         <PrivateRoute exact path="/add" component={PostQuestion} />
-        <Route path="/" component={ServerError} />
+        <Route render={() => <ServerError />} />
       </Switch>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import ServerError from "./404";
 
 // MUI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,13 +44,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Votes = ({ users, ques, match }) => {
+const Votes = ({ users, ques, match, authedUser }) => {
   const percentage = (first, second) => {
     return Math.floor((first / second) * 100);
   };
 
-  const one = ques.optionOne.votes.length;
-  const two = ques.optionTwo.votes.length;
+  const one = ques ? ques.optionOne.votes.length : <ServerError />;
+  const two = ques ? ques.optionTwo.votes.length : <ServerError />;
   const allVotes = one + two;
 
   const percentOne = percentage(one, allVotes);
@@ -62,67 +63,71 @@ const Votes = ({ users, ques, match }) => {
 
   return (
     <div>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.img}
-              component="img"
-              alt="author"
-              height="140"
-              title={ques.author}
-              image={users.find(user => user.id === ques.author).avatarURL}
-            />
+      {ques ? (
+        <Box component="fieldset" mb={3} borderColor="transparent">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.img}
+                component="img"
+                alt="author"
+                height="140"
+                title={ques.author}
+                image={users.find(user => user.id === ques.author).avatarURL}
+              />
 
-            <CardContent></CardContent>
-          </CardActionArea>
-          <Tooltip
-            title={`${one} ${
-              one > 1 ? "votes" : "vote"
-            } ${percentOne} % all votes`}
-            placement="right-end"
+              <CardContent></CardContent>
+            </CardActionArea>
+            <Tooltip
+              title={`${one} ${
+                one > 1 ? "votes" : "vote"
+              } ${percentOne} % all votes`}
+              placement="right-end"
+            >
+              <Typography fontSize="h6.fontSize">
+                {ques.optionOne.text}
+                <br />
+                <Rating
+                  name="read-only"
+                  value={value1}
+                  readOnly
+                  max={10}
+                  precision={0.5}
+                />
+              </Typography>
+            </Tooltip>
+            <Tooltip
+              title={`${two} ${
+                two > 1 ? "votes" : "vote"
+              } ${percentTwo} % of all votes`}
+              placement="right-end"
+            >
+              <Typography fontSize="h6.fontSize">
+                {ques.optionTwo.text}
+                <br />
+                <Rating
+                  name="read-only"
+                  value={value2}
+                  readOnly
+                  max={10}
+                  precision={0.5}
+                />
+              </Typography>
+            </Tooltip>
+          </Card>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            component={Link}
+            to="/pending"
           >
-            <Typography fontSize="h6.fontSize">
-              {ques.optionOne.text}
-              <br />
-              <Rating
-                name="read-only"
-                value={value1}
-                readOnly
-                max={10}
-                precision={0.5}
-              />
-            </Typography>
-          </Tooltip>
-          <Tooltip
-            title={`${two} ${
-              two > 1 ? "votes" : "vote"
-            } ${percentTwo} % of all votes`}
-            placement="right-end"
-          >
-            <Typography fontSize="h6.fontSize">
-              {ques.optionTwo.text}
-              <br />
-              <Rating
-                name="read-only"
-                value={value2}
-                readOnly
-                max={10}
-                precision={0.5}
-              />
-            </Typography>
-          </Tooltip>
-        </Card>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          component={Link}
-          to="/pending"
-        >
-          Go Back
-        </Button>
-      </Box>
+            Go Back
+          </Button>
+        </Box>
+      ) : (
+        <ServerError />
+      )}
     </div>
   );
 };
