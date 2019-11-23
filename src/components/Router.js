@@ -11,21 +11,17 @@ import Logout from "./Logout";
 import Votes from "./Votes";
 import PrivateRoute from "./PrivateRoutes";
 
-const Router = ({ loginUser }) => {
+const Router = () => {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={WelcomeCard} />
         <Route exact path="/login" component={Login} />
-        {/* {loginUser && ( */}
-        {/* <Fragment> */}
         <PrivateRoute exact path="/logout" component={Logout} />
-        <PrivateRoute exact path="/questions" component={QuestionList} />
+        <PrivateRoute exact path="/pending" component={QuestionList} />
         <PrivateRoute exact path="/questions/:id" component={Votes} />
         <PrivateRoute exact path="/leaderboard" component={LeaderBoard} />
         <PrivateRoute exact path="/add" component={PostQuestion} />
-        {/* </Fragment> */}
-        {/* )} */}
         <Route path="/" component={ServerError} />
       </Switch>
     </div>

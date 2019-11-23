@@ -118,7 +118,7 @@ const Votes = ({ users, ques, match }) => {
           color="primary"
           className={classes.button}
           component={Link}
-          to="/questions"
+          to="/pending"
         >
           Go Back
         </Button>

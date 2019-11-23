@@ -57,9 +57,7 @@ const Login = ({ login, users, authedUser, location }) => {
 
   if (authedUser) {
     let url =
-      location.state && location.state.from
-        ? location.state.from
-        : "/questions";
+      location.state && location.state.from ? location.state.from : "/pending";
     return <Redirect to={url} />;
   }
   return (

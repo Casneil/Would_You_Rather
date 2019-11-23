@@ -44,7 +44,7 @@ const Navbar = ({ users, authedUser }) => {
                   className={classes.menuButton}
                   color="inherit"
                   component={Link}
-                  to="/questions"
+                  to="/pending"
                 >
                   <QuestionAnswerIcon />
                 </Button>

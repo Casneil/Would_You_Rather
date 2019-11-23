@@ -64,7 +64,7 @@ const PostQuestion = ({ postQuestion }) => {
   }
 
   if (redirect) {
-    return <Redirect to="/questions" />;
+    return <Redirect to="/pending" />;
   }
 
   return (
