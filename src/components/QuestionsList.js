@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Question from "./Question";
 import { Link } from "react-router-dom";
 
-// Material UI
+// MUI STUFF
 import { Tooltip } from "@material-ui/core";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";

@@ -5,7 +5,7 @@ import { initialData } from "../actions/shared";
 import Router from "./Router";
 import "../App.css";
 
-//MUI Imports
+// MUI STUFF
 import Navbar from "./Navbar";
 
 const App = ({ authedUser, initialData }) => {

@@ -12,7 +12,6 @@ import Votes from "./Votes";
 import PrivateRoute from "./PrivateRoutes";
 
 const Router = ({ authedUser, users }) => {
-  console.log(users, authedUser);
   return (
     <div>
       <Switch>

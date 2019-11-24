@@ -5,7 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import Cover from "../images/cover.jpg";
 import Loading from "./Loading";
 
-// Material UI
+// MUI STUFF
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";

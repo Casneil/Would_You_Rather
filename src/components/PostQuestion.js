@@ -5,7 +5,7 @@ import { AddQuestion } from "../actions/shared";
 import QuestionsPic from "../images/quesPic.jpg";
 import Loading from "./Loading";
 
-// Material UI
+// MUI STUFF
 import { Tooltip } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";

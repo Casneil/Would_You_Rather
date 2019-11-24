@@ -6,8 +6,6 @@ import { recieveUsers } from "../actions/users";
 import { handleAnswer } from "../actions/shared";
 import Loading from "./Loading";
 
-// import { formatQuestion } from "../api/helper";
-
 // MUI STUFF
 import { makeStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
