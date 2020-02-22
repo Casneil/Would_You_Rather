@@ -1,7 +1,5 @@
 # Casneil's Would You Rather
 
-In the project directory, you can run:
-
 ## Why This Project:
 
 This application was made for Udacity's React Nanodegree Program. The aim of this project is to demonstrate understanding of managing Redux State, React-Router and Middlewares in a React applicattion.
